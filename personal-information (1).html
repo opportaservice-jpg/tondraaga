@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#14402A">
+<title>Informations personnelles | TONDAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F5A93C;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#E3E8E4;--soft:#F3F7F4;--red:#A3231A}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',system-ui,Arial,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+svg.defs{position:absolute;width:0;height:0}
+
+/* En-tête */
+.top{background:var(--deep);color:var(--cream);position:relative;overflow:hidden;padding:18px 18px 36px;border-radius:0 0 30px 30px}
+.top .wm{position:absolute;right:-70px;bottom:-90px;width:260px;opacity:.04}
+.topin{position:relative;max-width:760px;margin:auto}
+.back{display:inline-flex;align-items:center;gap:8px;background:rgba(251,243,228,.12);color:var(--cream);font-size:14px;font-weight:600;padding:9px 14px;border-radius:999px;margin-bottom:22px}
+.back svg{width:18px;height:18px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand .mark{width:54px;height:50px;flex-shrink:0}
+.wordmark{font-weight:800;font-size:28px;letter-spacing:.03em;line-height:1}
+.wordmark i{font-style:normal;color:var(--ochre)}
+.tagline{font-size:10px;font-weight:600;letter-spacing:.32em;color:rgba(251,243,228,.72);margin-top:7px}
+.hero{margin-top:28px}
+h1{font-size:28px;font-weight:800;line-height:1.15;margin-bottom:8px}
+.subtitle{font-size:15px;color:rgba(251,243,228,.82);line-height:1.55;max-width:540px}
+
+/* Contenu */
+.wrap{max-width:760px;margin:22px auto 0;padding:0 16px 10px}
+.profile-card{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:22px;padding:22px 20px;box-shadow:0 12px 34px rgba(20,64,42,.08)}
+.profile-head{display:flex;align-items:center;gap:15px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.avatar{width:60px;height:60px;flex:0 0 60px;border-radius:18px;background:var(--deep);color:var(--ochre);display:grid;place-items:center}
+.avatar svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.profile-title{font-size:18px;font-weight:800;color:var(--deep);line-height:1.25}
+.profile-sub{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.45}
+.item{padding:16px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px}
+.item:last-child{border-bottom:0;padding-bottom:2px}
+.item-label{font-size:14px;color:var(--muted);font-weight:500}
+.item-value{font-size:15px;font-weight:700;color:var(--deep);text-align:right;overflow-wrap:anywhere}
+.status{display:inline-flex;align-items:center;gap:7px;background:#E3F1E9;color:var(--green);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.notice{margin-top:16px;background:#FFF4DD;color:#7A5513;padding:15px 17px;border-radius:14px;font-size:13px;line-height:1.65}
+.notice strong{display:block;margin-bottom:4px;font-size:14px;font-weight:700}
+.actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.action{flex:1;min-width:160px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;min-height:52px;padding:0 16px;font-size:15px;font-weight:600;transition:background .15s,border-color .15s}
+.primary{background:var(--green);color:#fff}
+.primary:hover{background:var(--deep)}
+.secondary{background:#fff;border:1.5px solid var(--line);color:var(--deep)}
+.secondary:hover{background:var(--soft);border-color:#CBD6CE}
+
+/* États */
+.error,.loading{background:#fff;border:1.5px dashed #C9D6CC;border-radius:20px;padding:36px 20px;text-align:center;color:var(--muted);font-size:15px;line-height:1.55}
+.error{background:#FDECEA;border:1.5px solid #F6CFCB;color:var(--red)}
+.error strong{display:block;color:var(--red);font-size:17px;margin-bottom:6px}
+.loader{position:fixed;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;z-index:20;color:var(--deep);font-weight:600}
+.spin{width:26px;height:26px;border:3px solid #D9E4DC;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin-right:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Pied de page */
+footer{max-width:760px;margin:0 auto;padding:24px 16px 38px;text-align:center}
+footer .brand{justify-content:center;gap:10px;color:var(--deep)}
+footer .mark{width:34px;height:32px}
+footer .wordmark{font-size:19px}
+footer .wordmark i{color:var(--orange)}
+footer .tagline{color:var(--muted);font-size:8px;margin-top:5px;text-align:left}
+footer p{font-size:12px;color:var(--muted);margin-top:12px}
+
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media(max-width:560px){h1{font-size:24px}.wordmark{font-size:24px}.brand .mark{width:46px;height:43px}}
+@media(min-width:600px){.wrap{padding:0 18px}.profile-card{padding:26px}}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-dark" viewBox="0 0 140 130">
+  <circle cx="70" cy="60" r="28" fill="#F5A93C"/>
+  <g stroke="#F5A93C" stroke-width="5" stroke-linecap="round"><path d="M70 23V14M96.2 33.8l6.3-6.3M43.8 33.8l-6.3-6.3M107 60h9M33 60h-9"/></g>
+  <rect x="20" y="74" width="100" height="12" rx="6" fill="#FBF3E4"/>
+  <path d="M28 88H112L102 126Q101 130 97 130H43Q39 130 38 126Z" fill="#FBF3E4"/>
+  <g fill="#14402A"><path d="M50 91l7 7-7 7-7-7z"/><path d="M70 91l7 7-7 7-7-7z"/><path d="M90 91l7 7-7 7-7-7z"/><path d="M60 105l7 7-7 7-7-7z"/><path d="M80 105l7 7-7 7-7-7z"/></g>
+</symbol>
+<symbol id="mark-light" viewBox="0 0 140 130">
+  <circle cx="70" cy="60" r="28" fill="#F5A93C"/>
+  <g stroke="#F5A93C" stroke-width="5" stroke-linecap="round"><path d="M70 23V14M96.2 33.8l6.3-6.3M43.8 33.8l-6.3-6.3M107 60h9M33 60h-9"/></g>
+  <rect x="20" y="74" width="100" height="12" rx="6" fill="#14402A"/>
+  <path d="M28 88H112L102 126Q101 130 97 130H43Q39 130 38 126Z" fill="#1F5B3A"/>
+  <g fill="#F5A93C"><path d="M50 91l7 7-7 7-7-7z"/><path d="M70 91l7 7-7 7-7-7z"/><path d="M90 91l7 7-7 7-7-7z"/><path d="M60 105l7 7-7 7-7-7z"/><path d="M80 105l7 7-7 7-7-7z"/></g>
+</symbol>
+</defs></svg>
+<div class="loader" id="loader"><span class="spin"></span>Chargement du compte...</div>
+<header class="top">
+<svg class="wm" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-dark"/></svg>
+<div class="topin">
+<a class="back" href="seller-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Retour au tableau de bord</a>
+<div class="brand">
+  <svg class="mark" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-dark"/></svg>
+  <div><div class="wordmark">TOND<i>AA</i>GA</div><div class="tagline">MARCHÉ AFRICAIN</div></div>
+</div>
+<div class="hero"><h1>Informations personnelles</h1><p class="subtitle">Consultez les informations liées à votre compte vendeur.</p></div>
+</div></header>
+<main class="wrap">
+<div id="content"><div class="loading">Chargement de vos informations...</div></div>
+</main>
+<footer>
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-light"/></svg>
+    <div><div class="wordmark">TOND<i>AA</i>GA</div><div class="tagline">MARCHÉ AFRICAIN</div></div>
+  </div>
+  <p>© TONDAAGA · Espace vendeur</p>
+</footer>
+<script>
+const AUTH_URL="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-auth";
+const TOKEN_KEY="tondraaga_session_token";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const countries={"+226":"Burkina Faso","+225":"Côte d’Ivoire","+223":"Mali","+227":"Niger","+228":"Togo","+229":"Bénin"};
+function hideLoader(){document.getElementById("loader").style.display="none"}
+function renderSeller(s){
+ const code=String(s.country_calling_code||"");
+ const phone=s.phone_normalized||"Non renseigné";
+ const status=s.account_status||"unknown";
+ const statusHtml=status==="active"?'<span class="status"><span class="dot"></span>Compte actif</span>':`<span class="status" style="background:#FFF1E8;color:#A34419">${esc(status)}</span>`;
+ document.getElementById("content").innerHTML=`
+ <section class="profile-card">
+  <div class="profile-head"><div class="avatar">${code?`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>`:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>`}</div><div><div class="profile-title">Compte vendeur TONDAAGA</div><div class="profile-sub">Informations enregistrées lors de votre inscription</div></div></div>
+  <div class="item"><div class="item-label">Pays</div><div class="item-value">${esc(countries[code]||"Pays non identifié")}</div></div>
+  <div class="item"><div class="item-label">Indicatif téléphonique</div><div class="item-value">${esc(code||"—")}</div></div>
+  <div class="item"><div class="item-label">Numéro de téléphone</div><div class="item-value">${esc(phone)}</div></div>
+  <div class="item"><div class="item-label">État du compte</div><div class="item-value">${statusHtml}</div></div>
+ </section>
+ <div class="notice"><strong>À propos de vos informations</strong>Cette page affiche les données actuellement enregistrées pour votre compte. Le numéro de téléphone sert à vous identifier lors de la connexion. Pour éviter toute modification non vérifiée, son changement n’est pas proposé ici.</div>
+ <div class="actions"><a class="action primary" href="seller-dashboard.html">Retour à l’espace vendeur</a><a class="action secondary" href="settings.html">Paramètres</a></div>`;
+}
+async function load(){
+ const token=localStorage.getItem(TOKEN_KEY);
+ if(!token){location.replace("login.html");return}
+ try{
+  const r=await fetch(AUTH_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({action:"session"})});
+  let d={};try{d=await r.json()}catch{}
+  if(!r.ok||d.success===false||!d.seller){localStorage.removeItem(TOKEN_KEY);location.replace("login.html");return}
+  renderSeller(d.seller);
+ }catch(e){document.getElementById("content").innerHTML='<div class="error"><strong>Chargement impossible</strong>Vérifiez votre connexion Internet puis actualisez la page.</div>'}
+ finally{hideLoader()}
+}
+load();
+</script>
+</body>
+</html>
