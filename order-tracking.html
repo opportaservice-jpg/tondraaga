@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Suivi de commande | TONDAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F5A93C;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#E3E8E4;--soft:#F3F7F4;--red:#A3231A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',system-ui,Arial,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit}
+svg.defs{position:absolute;width:0;height:0}
+
+/* En-tête */
+.header{background:var(--deep);color:var(--cream);position:relative;overflow:hidden;padding:22px 18px 40px;border-radius:0 0 30px 30px}
+.header .wm{position:absolute;right:-70px;bottom:-90px;width:260px;opacity:.04}
+.hin{position:relative;max-width:850px;margin:auto}
+.brand{display:flex;align-items:center;gap:14px}
+.brand .mark{width:54px;height:50px;flex-shrink:0}
+.wordmark{font-weight:800;font-size:28px;letter-spacing:.03em;line-height:1}
+.wordmark i{font-style:normal;color:var(--ochre)}
+.tagline{font-size:10px;font-weight:600;letter-spacing:.32em;color:rgba(251,243,228,.72);margin-top:7px}
+.hero{margin-top:30px}
+.hero h1{font-size:28px;font-weight:800;line-height:1.15}
+.hero p{margin-top:8px;font-size:15px;color:rgba(251,243,228,.82);line-height:1.5;max-width:520px}
+
+/* Contenu */
+main{max-width:850px;margin:22px auto 0;padding:0 16px 30px;position:relative}
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--deep);font-weight:600;font-size:14px;background:#fff;border:1.5px solid rgba(20,64,42,.12);border-radius:999px;padding:9px 15px;margin-bottom:16px;box-shadow:0 6px 18px rgba(20,64,42,.08)}
+.card{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:22px;padding:24px 22px;box-shadow:0 12px 34px rgba(20,64,42,.08)}
+.topline{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.ref{font-size:22px;font-weight:800;color:var(--deep);margin-top:6px;overflow-wrap:anywhere;letter-spacing:.01em}
+.muted{color:var(--muted);font-size:14px;line-height:1.55}
+.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:8px 14px;background:#FFF1D6;color:#8A5410;font-size:13px;font-weight:700;white-space:nowrap}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.pill.done{background:#E3F1E9;color:var(--green)}
+.pill.bad{background:#FDECEA;color:var(--red)}
+
+/* Progression */
+.tracker{display:grid;grid-template-columns:repeat(4,1fr);margin:26px 0 4px}
+.step{text-align:center;position:relative;padding:0 4px}
+.step::before{content:"";position:absolute;top:15px;left:-50%;width:100%;height:3px;background:var(--line)}
+.step:first-child::before{display:none}
+.step.done::before,.step.current::before{background:var(--green)}
+.dot{width:32px;height:32px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:#fff;border:3px solid var(--line);color:var(--muted);font-size:13px;font-weight:700;position:relative;z-index:1}
+.step.done .dot{background:var(--green);border-color:var(--green);color:#fff}
+.step.current .dot{border-color:var(--ochre);background:#fff;color:var(--deep);box-shadow:0 0 0 5px rgba(245,169,60,.22)}
+.step span{display:block;margin-top:9px;font-size:12px;font-weight:600;color:var(--muted)}
+.step.done span,.step.current span{color:var(--deep)}
+.alert{margin-top:22px;border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.55;background:#FDECEA;color:var(--red);font-weight:500}
+
+/* Montants */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.stat{background:var(--soft);border-radius:16px;padding:15px}
+.stat small{display:block;color:var(--muted);font-size:12px;font-weight:600;margin-bottom:6px}
+.stat strong{font-size:17px;font-weight:800;color:var(--deep)}
+.stat.total{background:var(--deep)}
+.stat.total small{color:rgba(251,243,228,.75)}
+.stat.total strong{color:var(--cream)}
+
+/* Boutiques */
+h2{font-size:18px;font-weight:800;color:var(--deep);margin:28px 0 14px}
+.shop{border:1.5px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+.shophead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.shopname{font-weight:800;font-size:16px;color:var(--deep)}
+.status{font-size:12px;font-weight:700;border-radius:999px;padding:6px 11px;background:#EEF1EF;color:#4A5563;white-space:nowrap}
+.status.done{background:#E3F1E9;color:var(--green)}
+.status.bad{background:#FDECEA;color:var(--red)}
+.amounts{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:12px;margin-top:14px;font-size:13px;color:var(--muted)}
+.amounts strong{color:var(--ink)}
+.note{display:flex;gap:10px;background:#FFF4DD;color:#7A5513;border-radius:14px;padding:13px 15px;margin-top:22px;font-size:13px;line-height:1.6}
+.note svg{width:20px;height:20px;flex-shrink:0;margin-top:1px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+
+.error{background:#FDECEA;color:var(--red);padding:16px;border-radius:14px;line-height:1.55;font-size:14px}
+.loading{padding:40px 10px;text-align:center;color:var(--muted);font-size:15px}
+.spinner{width:30px;height:30px;border:3px solid var(--line);border-top-color:var(--green);border-radius:50%;margin:0 auto 14px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.actions{margin-top:16px}
+.primary{width:100%;height:54px;border:none;border-radius:14px;background:var(--green);color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:background .15s}
+.primary:hover{background:var(--deep)}
+.primary:disabled{opacity:.6;cursor:wait}
+
+/* Pied de page */
+footer{max-width:850px;margin:6px auto 0;padding:22px 16px 34px;text-align:center}
+footer .brand{justify-content:center;gap:10px;color:var(--deep)}
+footer .mark{width:34px;height:32px}
+footer .wordmark{font-size:19px}
+footer .wordmark i{color:var(--orange)}
+footer .tagline{color:var(--muted);font-size:8px;margin-top:5px;text-align:left}
+footer p{font-size:12px;color:var(--muted);margin-top:12px}
+
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media(max-width:560px){
+  .hero h1{font-size:24px}.wordmark{font-size:24px}.brand .mark{width:46px;height:43px}
+  .topline{flex-direction:column}.stats{grid-template-columns:1fr}
+  .amounts{flex-direction:column;gap:6px}.card{padding:20px 16px}
+  .step span{font-size:11px}
+}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<!-- Logo sur fond sombre -->
+<symbol id="mark-dark" viewBox="0 0 140 130">
+  <circle cx="70" cy="60" r="28" fill="#F5A93C"/>
+  <g stroke="#F5A93C" stroke-width="5" stroke-linecap="round"><path d="M70 23V14M96.2 33.8l6.3-6.3M43.8 33.8l-6.3-6.3M107 60h9M33 60h-9"/></g>
+  <rect x="20" y="74" width="100" height="12" rx="6" fill="#FBF3E4"/>
+  <path d="M28 88H112L102 126Q101 130 97 130H43Q39 130 38 126Z" fill="#FBF3E4"/>
+  <g fill="#14402A"><path d="M50 91l7 7-7 7-7-7z"/><path d="M70 91l7 7-7 7-7-7z"/><path d="M90 91l7 7-7 7-7-7z"/><path d="M60 105l7 7-7 7-7-7z"/><path d="M80 105l7 7-7 7-7-7z"/></g>
+</symbol>
+<!-- Logo sur fond clair -->
+<symbol id="mark-light" viewBox="0 0 140 130">
+  <circle cx="70" cy="60" r="28" fill="#F5A93C"/>
+  <g stroke="#F5A93C" stroke-width="5" stroke-linecap="round"><path d="M70 23V14M96.2 33.8l6.3-6.3M43.8 33.8l-6.3-6.3M107 60h9M33 60h-9"/></g>
+  <rect x="20" y="74" width="100" height="12" rx="6" fill="#14402A"/>
+  <path d="M28 88H112L102 126Q101 130 97 130H43Q39 130 38 126Z" fill="#1F5B3A"/>
+  <g fill="#F5A93C"><path d="M50 91l7 7-7 7-7-7z"/><path d="M70 91l7 7-7 7-7-7z"/><path d="M90 91l7 7-7 7-7-7z"/><path d="M60 105l7 7-7 7-7-7z"/><path d="M80 105l7 7-7 7-7-7z"/></g>
+</symbol>
+</defs></svg>
+
+<header class="header">
+  <svg class="wm" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-dark"/></svg>
+  <div class="hin">
+    <a class="brand" href="index.html" aria-label="TONDAAGA, marché africain">
+      <svg class="mark" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-dark"/></svg>
+      <div>
+        <div class="wordmark">TOND<i>AA</i>GA</div>
+        <div class="tagline">MARCHÉ AFRICAIN</div>
+      </div>
+    </a>
+    <div class="hero">
+      <h1>Suivi de commande</h1>
+      <p>Suivez en temps réel l'avancement de votre commande auprès des boutiques.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <a class="back" href="index.html">← Retour à l'accueil</a>
+  <section id="content" class="card"><div class="loading"><div class="spinner"></div>Chargement de votre commande…</div></section>
+  <div class="actions"><button class="primary" id="refresh" type="button">Actualiser le suivi</button></div>
+</main>
+
+<footer>
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-light"/></svg>
+    <div>
+      <div class="wordmark">TOND<i>AA</i>GA</div>
+      <div class="tagline">MARCHÉ AFRICAIN</div>
+    </div>
+  </div>
+  <p>© TONDAAGA · Votre marché africain en ligne</p>
+</footer>
+
+<script>
+const API="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-public";
+const params=new URLSearchParams(location.search);
+const ref=params.get("ref")||"";
+const token=params.get("token")||"";
+const content=document.getElementById("content");
+const refreshBtn=document.getElementById("refresh");
+const money=n=>Number(n||0).toLocaleString("fr-FR")+" FCFA";
+const date=v=>{if(!v)return "—";const d=new Date(v);return isNaN(d)?"—":d.toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"});};
+const labels={
+pending_contact:"En attente de contact",
+in_discussion:"En discussion",
+confirmed:"Confirmée",
+refused:"Refusée",
+cancelled:"Annulée",
+completed:"Terminée"
+};
+const steps=[
+ ["pending_contact","Contact"],
+ ["in_discussion","Discussion"],
+ ["confirmed","Confirmée"],
+ ["completed","Terminée"]
+];
+function statusClass(s){return s==="completed"?"done":(["refused","cancelled"].includes(s)?"bad":"");}
+function statusLabel(s){return labels[s]||String(s||"Statut en cours").replaceAll("_"," ");}
+function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function tracker(status){
+  if(status==="refused"||status==="cancelled"){
+    return `<div class="alert">${status==="refused"?"Cette commande a été refusée par la boutique.":"Cette commande a été annulée."}</div>`;
+  }
+  const current=steps.findIndex(s=>s[0]===status);
+  if(current<0)return "";
+  return `<div class="tracker" aria-label="Progression de la commande">${steps.map((s,i)=>{
+    const cls=status==="completed"||i<current?"done":(i===current?"current":"");
+    return `<div class="step ${cls}"><div class="dot">${cls==="done"?"✓":i+1}</div><span>${s[1]}</span></div>`;
+  }).join("")}</div>`;
+}
+
+async function load(){
+ if(!ref||!token){content.innerHTML='<div class="error"><strong>Lien de suivi incomplet.</strong><br>Ouvrez le lien complet reçu après votre commande.</div>';return;}
+ content.innerHTML='<div class="loading"><div class="spinner"></div>Chargement de votre commande…</div>';
+ refreshBtn.disabled=true;
+ try{
+  const response=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"order-track",order_reference:ref,tracking_token:token})});
+  const data=await response.json();
+  if(!response.ok||!data.success||!data.order)throw new Error(data.error||"Commande introuvable ou lien invalide.");
+  const o=data.order,subs=Array.isArray(o.seller_orders)?o.seller_orders:[];
+  content.innerHTML=`
+   <div class="topline">
+     <div>
+       <div class="eyebrow">Commande</div>
+       <div class="ref">${escapeHtml(o.order_reference||ref)}</div>
+       <div class="muted" style="margin-top:6px">Passée le ${date(o.created_at)}</div>
+     </div>
+     <span class="pill ${statusClass(o.order_status)}">${escapeHtml(statusLabel(o.order_status))}</span>
+   </div>
+   ${tracker(o.order_status)}
+   <div class="stats">
+    <div class="stat"><small>Articles</small><strong>${money(o.items_subtotal_xof)}</strong></div>
+    <div class="stat"><small>Livraison</small><strong>${money(o.delivery_total_xof)}</strong></div>
+    <div class="stat total"><small>Total commande</small><strong>${money(o.grand_total_xof)}</strong></div>
+   </div>
+   <h2>État auprès des boutiques</h2>
+   ${subs.length?subs.map(s=>`
+     <div class="shop">
+       <div class="shophead">
+         <div><div class="shopname">${escapeHtml(s.shop?.shop_name||"Boutique")}</div><div class="muted" style="margin-top:4px">Mise à jour : ${date(s.created_at)}</div></div>
+         <span class="status ${statusClass(s.status)}">${escapeHtml(statusLabel(s.status))}</span>
+       </div>
+       <div class="amounts"><span>Sous-total : <strong>${money(s.items_subtotal_xof)}</strong></span><span>Livraison : <strong>${money(s.delivery_fee_xof)}</strong></span><span>Total : <strong>${money(s.seller_order_total_xof)}</strong></span></div>
+     </div>`).join(""):'<p class="muted">Aucune information boutique disponible pour le moment.</p>'}
+   <div class="note">
+     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+     <span>Les statuts sont actualisés lorsque les boutiques mettent à jour votre commande. Utilisez « Actualiser le suivi » pour vérifier les dernières informations.</span>
+   </div>`;
+ }catch(e){
+  content.innerHTML=`<div class="error"><strong>Impossible de charger le suivi.</strong><br>${escapeHtml(e.message||"Erreur de connexion. Réessayez.")}</div>`;
+ }finally{
+  refreshBtn.disabled=false;
+ }
+}
+refreshBtn.addEventListener("click",load);
+load();
+</script>
+</body>
+</html>
