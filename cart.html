@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FBF3E4">
+<title>Mon panier | TONDRAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#DDE3DF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:90px}
+button,input,select{font:inherit}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+svg.defs{position:absolute;width:0;height:0}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.header{background:var(--deep);color:var(--cream);position:relative;overflow:hidden;padding:16px 18px 30px;border-radius:0 0 28px 28px}
+.header .wm{position:absolute;right:-50px;bottom:-60px;width:240px;opacity:.1}
+.hin{position:relative;max-width:700px;margin:auto}
+.header-top{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.back{width:44px;height:44px;border-radius:14px;background:rgba(251,243,228,.12);display:grid;place-items:center;color:var(--cream)}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:36px;height:36px}
+.brand b{font-size:20px;font-weight:800;letter-spacing:.04em}
+.brand b i{font-style:normal;color:var(--ochre)}
+.page-title{font-size:26px;font-weight:800;margin-bottom:6px}
+.subtitle{color:rgba(251,243,228,.82);font-size:15px}
+.container{max-width:700px;margin:auto;padding:20px 16px}
+.section{background:#fff;padding:20px;border-radius:20px;border:1.5px solid rgba(20,64,42,.1);margin-bottom:16px;box-shadow:0 10px 30px rgba(20,64,42,.07)}
+.section-title{font-size:18px;font-weight:800;color:var(--deep);margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cart-item{display:grid;grid-template-columns:88px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid #EEF1EE}
+.cart-item:first-child{padding-top:0}
+.cart-item:last-child{border-bottom:none;padding-bottom:0}
+.product-image{width:88px;height:94px;background:#E3F1E9;border-radius:12px;overflow:hidden;display:grid;place-items:center;color:var(--green);font-size:12px;text-align:center;padding:4px}
+.product-image img{width:100%;height:100%;object-fit:cover}
+.product-name{font-size:16px;font-weight:600;line-height:1.35;color:var(--deep)}
+.shop-name{color:var(--muted);font-size:13px;margin-top:4px}
+.price{font-weight:800;font-size:17px;color:var(--green);margin-top:6px}
+.item-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.quantity{display:flex;align-items:center;gap:6px;background:#F3F7F4;border-radius:12px;padding:3px}
+.quantity button{border:none;background:#fff;color:var(--green);font-size:20px;font-weight:600;width:38px;height:38px;border-radius:10px;cursor:pointer}
+.quantity span{font-size:15px;font-weight:600;min-width:24px;text-align:center}
+.remove{border:none;background:transparent;color:#A3231A;font-size:14px;font-weight:600;cursor:pointer;padding:10px 4px}
+.empty{text-align:center;padding:38px 20px}
+.empty-icon{width:68px;height:68px;border-radius:22px;background:#E3F1E9;color:var(--green);display:grid;place-items:center;margin:0 auto 16px}
+.empty-icon svg.i{width:32px;height:32px}
+.empty strong{font-size:19px;color:var(--deep)}
+.empty p{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.6}
+.primary-link{display:inline-block;background:var(--green);color:#fff;padding:15px 22px;border-radius:12px;font-size:15px;font-weight:600;margin-top:20px}
+.primary-link:hover{background:var(--deep)}
+.courier-intro{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:14px}
+.optional{background:#FFEFD0;padding:4px 10px;border-radius:999px;color:#7A5513;font-size:11px;font-weight:600}
+.no-courier,.courier-option{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer}
+.no-courier{margin-bottom:10px}
+.no-courier:has(input:checked),.courier-option:has(input:checked){border-color:var(--green);background:#F3F9F5}
+.no-courier input,.courier-option input{accent-color:var(--green);margin-top:3px;width:18px;height:18px;flex-shrink:0}
+.no-courier strong,.courier-option strong{font-size:15px;color:var(--deep)}
+.no-courier p,.courier-option p{color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+.courier-list{display:grid;gap:10px}
+.courier-fee{margin-left:auto;white-space:nowrap;font-size:14px;font-weight:600;color:var(--green)}
+.courier-empty{padding:14px;background:#FFF4DD;color:#7A5513;font-size:14px;line-height:1.6;border-radius:12px}
+.summary-row{display:flex;justify-content:space-between;gap:10px;font-size:15px;margin:13px 0;color:var(--muted)}
+.summary-row strong{text-align:right;color:var(--ink)}
+.total-row{border-top:1.5px dashed var(--line);padding-top:16px;margin-top:16px;font-size:19px;font-weight:800;color:var(--deep)}
+.total-row strong{color:var(--green)}
+.confirm-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:12px;height:54px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px;transition:background .15s}
+.confirm-btn:hover{background:var(--deep)}
+.confirm-btn:disabled{opacity:.5;cursor:not-allowed}
+.info{color:var(--muted);font-size:13px;line-height:1.6;margin-top:14px;display:flex;gap:8px}
+.info svg.i{width:18px;height:18px;margin-top:2px;color:var(--green)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid rgba(20,64,42,.12);display:grid;grid-template-columns:repeat(3,1fr);height:72px;padding-bottom:env(safe-area-inset-bottom);z-index:10}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6B7580;font-size:12px;font-weight:600}
+.nav-item.active{color:var(--green)}
+.nav-item.active svg{stroke-width:2.4}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media (min-width:600px){.container{padding-top:26px}.bottom-nav{left:50%;transform:translateX(-50%);max-width:700px;border-left:1px solid rgba(20,64,42,.12);border-right:1px solid rgba(20,64,42,.12)}}
+
+textarea{font:inherit}
+.lbl{display:block;font-size:14px;font-weight:600;color:var(--deep);margin:14px 0 6px}
+.lbl:first-of-type{margin-top:0}
+.input{width:100%;height:50px;padding:0 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font-size:15px}
+textarea.input{height:auto;min-height:88px;padding:12px 14px;resize:vertical}
+.input:focus{border-color:var(--green);outline:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row2 .lbl:first-of-type{margin-top:14px}
+.outline-btn{width:100%;background:#fff;color:var(--green);border:1.5px solid var(--green);border-radius:12px;height:50px;font-size:15px;font-weight:600;cursor:pointer;margin:4px 0 14px}
+.outline-btn:hover{background:#F3F9F5}
+.msg{color:var(--muted);font-size:13px;line-height:1.6;margin-top:12px}
+.success{text-align:center;padding:10px 0 4px}
+.success .empty-icon{background:#E3F1E9}
+.success h2{font-size:22px;font-weight:800;color:var(--deep);margin-bottom:10px}
+.success p{color:var(--muted);font-size:14px;line-height:1.6;margin-top:6px}
+.success p strong{color:var(--deep)}
+.wa-btn{display:flex;align-items:center;justify-content:center;background:var(--green);color:#fff;padding:15px 18px;border-radius:12px;font-size:15px;font-weight:600;margin-top:12px;text-align:center}
+.wa-btn:hover{background:var(--deep)}
+.track{display:block;text-align:center;color:var(--green);font-weight:600;font-size:14px;margin-top:16px}
+.hidden{display:none}
+
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-light" viewBox="0 0 120 120">
+<circle cx="60" cy="46" r="26" fill="#F2A83B"/>
+<path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#FBF3E4"/>
+<rect x="12" y="54" width="96" height="10" rx="5" fill="#FBF3E4"/>
+<g fill="#14402A"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g>
+</symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.5a5 5 0 015 5"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".8"/></symbol>
+</defs></svg>
+
+<header class="header">
+  <svg class="wm" viewBox="0 0 120 120" aria-hidden="true"><use href="#mark-light"/></svg>
+  <div class="hin">
+    <div class="header-top">
+      <a href="marketplace.html" class="back" aria-label="Retour à la marketplace"><svg class="i"><use href="#i-back"/></svg></a>
+      <div class="brand">
+        <svg aria-hidden="true"><use href="#mark-light"/></svg>
+        <b>TOND<i>AA</i>GA</b>
+      </div>
+    </div>
+    <h1 class="page-title">Mon panier</h1>
+    <p class="subtitle"><span id="cartCount">0 article</span> · Vérifiez vos articles avant de commander.</p>
+  </div>
+</header>
+
+<main class="container">
+  <div id="cartSection">
+
+    <div id="cartContent">
+
+      <section class="section">
+        <div class="section-title">Mes articles</div>
+        <div id="cartItems"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Informations de livraison</div>
+
+        <label class="lbl" for="buyerName">Nom complet</label>
+        <input class="input" id="buyerName" maxlength="120" placeholder="Votre nom" autocomplete="name">
+
+        <label class="lbl" for="buyerPhone">Téléphone</label>
+        <input class="input" id="buyerPhone" maxlength="30" type="tel" placeholder="Votre numéro" autocomplete="tel">
+
+        <div class="row2">
+          <div>
+            <label class="lbl" for="buyerCity">Ville</label>
+            <input class="input" id="buyerCity" maxlength="100" placeholder="Ex : Ouagadougou">
+          </div>
+          <div>
+            <label class="lbl" for="buyerZone">Quartier / zone</label>
+            <input class="input" id="buyerZone" maxlength="100" placeholder="Votre quartier">
+          </div>
+        </div>
+
+        <label class="lbl" for="buyerAddress">Adresse précise <span class="optional">Facultatif</span></label>
+        <input class="input" id="buyerAddress" maxlength="500" placeholder="Secteur, rue, repère...">
+
+        <label class="lbl" for="buyerNote">Note au vendeur <span class="optional">Facultatif</span></label>
+        <textarea class="input" id="buyerNote" maxlength="1000" placeholder="Précisions sur votre commande"></textarea>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Choisir un livreur <span class="optional">Facultatif</span></div>
+
+        <p class="courier-intro">Le choix du livreur est facultatif. Si vous n'en sélectionnez aucun, aucun livreur ne sera attribué et aucun frais de livraison ne sera ajouté.</p>
+
+        <label class="no-courier">
+          <input type="radio" name="courier" value="" checked id="noCourier">
+          <div>
+            <strong>Ne pas choisir de livreur</strong>
+            <p>Je souhaite organiser la livraison directement avec le vendeur.</p>
+          </div>
+        </label>
+
+        <button class="outline-btn" id="loadCouriers" type="button" style="margin-top:12px">Afficher les livreurs disponibles</button>
+        <div class="courier-list" id="couriersList"></div>
+        <p class="msg" id="courierMessage"></p>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Résumé de la commande</div>
+
+        <div class="summary-row"><span>Sous-total des produits</span><strong id="subtotal">0 FCFA</strong></div>
+        <div class="summary-row"><span>Livraison</span><strong id="delivery">0 FCFA</strong></div>
+        <div class="summary-row total-row"><span>Total</span><strong id="grandTotal">0 FCFA</strong></div>
+
+        <button class="confirm-btn" id="placeOrder" type="button">Confirmer et contacter le vendeur</button>
+
+        <p class="info">
+          <svg class="i" aria-hidden="true"><use href="#i-info"/></svg>
+          <span>Les prix définitifs sont vérifiés dans la base de données au moment de l'enregistrement.</span>
+        </p>
+      </section>
+
+    </div>
+
+    <div id="emptyCart" class="section empty" style="display:none">
+      <div class="empty-icon"><svg class="i" aria-hidden="true"><use href="#i-cart"/></svg></div>
+      <strong>Votre panier est vide</strong>
+      <p>Découvrez les produits disponibles et ajoutez vos articles préférés.</p>
+      <a href="marketplace.html" class="primary-link">Découvrir les produits</a>
+    </div>
+
+  </div>
+
+  <section id="successSection" class="section hidden"></section>
+</main>
+
+<nav class="bottom-nav" aria-label="Navigation principale">
+  <a href="marketplace.html" class="nav-item"><svg class="i"><use href="#i-home"/></svg><span>Accueil</span></a>
+  <a href="cart.html" class="nav-item active" aria-current="page"><svg class="i"><use href="#i-cart"/></svg><span>Panier</span></a>
+  <a href="network.html" class="nav-item"><svg class="i"><use href="#i-users"/></svg><span>Réseau</span></a>
+</nav>
+
+<script>
+const API="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-public";
+
+let cart=[];
+let couriers=[];
+let selectedCourier=null;
+let deliveryFee=0;
+
+const $=id=>document.getElementById(id);
+
+function money(n){
+  return Number(n||0).toLocaleString("fr-FR")+" FCFA";
+}
+function safe(v){
+  return String(v??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+function readCart(){
+  try{
+    const value=JSON.parse(localStorage.getItem("tondraaga_cart")||"[]");
+    cart=Array.isArray(value)?value:[];
+  }catch(e){cart=[];}
+  cart=cart.filter(x=>x && (x.product_id||x.id) && Number(x.quantity)>0);
+}
+function saveCart(){
+  localStorage.setItem("tondraaga_cart",JSON.stringify(cart));
+  const count=cart.reduce((s,x)=>s+Number(x.quantity),0);
+  localStorage.setItem("tondraaga_cart_count",String(count));
+  $("cartCount").textContent=count+" article"+(count>1?"s":"");
+}
+function subtotal(){
+  return cart.reduce((s,x)=>s+Number(x.price||0)*Number(x.quantity||1),0);
+}
+function render(){
+  saveCart();
+
+  if(!cart.length){
+    $("cartContent").style.display="none";
+    $("emptyCart").style.display="block";
+    return;
+  }
+
+  $("emptyCart").style.display="none";
+  $("cartContent").style.display="block";
+
+  $("cartItems").innerHTML=cart.map((x,i)=>`
+    <div class="cart-item">
+      <div class="product-image"><img src="${safe(x.image||"https://placehold.co/150x150?text=Produit")}" alt=""></div>
+      <div>
+        <div class="product-name">${safe(x.name||"Produit")}</div>
+        <div class="shop-name">${safe(x.shop_name||"Boutique")}</div>
+        <div class="price">${money(x.price)}</div>
+        <div class="item-bottom">
+          <div class="quantity">
+            <button type="button" onclick="changeQty(${i},-1)" aria-label="Diminuer la quantité">−</button>
+            <span>${Number(x.quantity)}</span>
+            <button type="button" onclick="changeQty(${i},1)" aria-label="Augmenter la quantité">+</button>
+          </div>
+          <button class="remove" type="button" onclick="removeItem(${i})">Retirer</button>
+        </div>
+      </div>
+    </div>`).join("");
+
+  updateSummary();
+}
+function changeQty(i,delta){
+  if(!cart[i])return;
+  cart[i].quantity=Number(cart[i].quantity)+delta;
+  if(cart[i].quantity<=0)cart.splice(i,1);
+  render();
+}
+function removeItem(i){
+  cart.splice(i,1);
+  render();
+}
+function updateSummary(){
+  $("subtotal").textContent=money(subtotal());
+  $("delivery").textContent=money(deliveryFee);
+  $("grandTotal").textContent=money(subtotal()+deliveryFee);
+}
+function clearCourier(){
+  selectedCourier=null;
+  deliveryFee=0;
+  updateSummary();
+}
+async function loadCouriers(){
+  const city=$("buyerCity").value.trim();
+  const zone=$("buyerZone").value.trim();
+
+  if(!city){
+    $("courierMessage").textContent="Saisissez d'abord votre ville.";
+    return;
+  }
+
+  $("courierMessage").textContent="Recherche des livreurs...";
+  $("couriersList").innerHTML="";
+  $("noCourier").checked=true;
+  clearCourier();
+
+  try{
+    const res=await fetch(API,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({action:"public-couriers",city,zone})
+    });
+    const data=await res.json();
+
+    if(!res.ok||!data.success)throw new Error(data.error||"Chargement impossible.");
+
+    couriers=data.couriers||[];
+
+    if(!couriers.length){
+      $("courierMessage").textContent="Aucun livreur avec tarif disponible dans cette zone. Vous pouvez continuer sans livreur.";
+      return;
+    }
+
+    $("courierMessage").textContent="Choisissez un livreur ou continuez sans livreur.";
+    $("couriersList").innerHTML=couriers.map((c,i)=>`
+      <label class="courier-option">
+        <input type="radio" name="courier" value="${safe(c.id)}" onchange="chooseCourier(${i})">
+        <div>
+          <strong>${safe(c.name)}</strong>
+          <p>${safe(c.city)} · ${Number(c.average_rating||0).toFixed(1)}/5</p>
+        </div>
+        <span class="courier-fee">${money(c.delivery_fee_xof)}</span>
+      </label>
+    `).join("");
+
+  }catch(error){
+    $("courierMessage").textContent=error.message||"Impossible de charger les livreurs.";
+  }
+}
+function chooseCourier(index){
+  const c=couriers[index];
+  if(!c)return;
+  selectedCourier=c;
+  deliveryFee=Number(c.delivery_fee_xof||0);
+  updateSummary();
+}
+async function placeOrder(){
+  if(!cart.length)return;
+
+  const buyer={
+    name:$("buyerName").value.trim(),
+    phone:$("buyerPhone").value.trim(),
+    city:$("buyerCity").value.trim(),
+    zone:$("buyerZone").value.trim(),
+    address:$("buyerAddress").value.trim(),
+    note:$("buyerNote").value.trim()
+  };
+
+  if(buyer.name.length<2||buyer.phone.length<5||buyer.city.length<2){
+    alert("Veuillez renseigner votre nom, votre téléphone et votre ville.");
+    return;
+  }
+
+  const button=$("placeOrder");
+  button.disabled=true;
+  button.textContent="Enregistrement de la commande...";
+
+  try{
+    const res=await fetch(API,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        action:"create-order",
+        buyer,
+        items:cart.map(x=>({
+          product_id:x.product_id||x.id,
+          quantity:Number(x.quantity)
+        })),
+        courier_id:selectedCourier?selectedCourier.id:null,
+        courier_name:selectedCourier?selectedCourier.name:null
+      })
+    });
+
+    const data=await res.json();
+    if(!res.ok||!data.success)throw new Error(data.error||"La commande n'a pas pu être enregistrée.");
+
+    localStorage.setItem("tondraaga_last_order",JSON.stringify(data));
+    cart=[];
+    saveCart();
+    localStorage.removeItem("tondraaga_cart");
+    showSuccess(data);
+
+  }catch(error){
+    alert(error.message||"Une erreur est survenue.");
+    button.disabled=false;
+    button.textContent="Confirmer et contacter le vendeur";
+  }
+}
+function showSuccess(data){
+  $("cartSection").classList.add("hidden");
+  const orders=data.seller_orders||[];
+
+  $("successSection").classList.remove("hidden");
+  $("successSection").innerHTML=`
+    <div class="success">
+      <div class="empty-icon"><svg class="i" aria-hidden="true"><use href="#i-cart"/></svg></div>
+      <h2>Commande enregistrée !</h2>
+      <p>Référence : <strong>${safe(data.order_reference)}</strong></p>
+      <p>Total : <strong>${money(data.grand_total_xof)}</strong></p>
+      <p style="margin-top:12px">Votre commande est enregistrée. Vous devez maintenant envoyer le message WhatsApp à chaque vendeur pour commencer la discussion.</p>
+    </div>
+    <div>
+      ${orders.map(o=>`
+        <a class="wa-btn" href="${safe(o.whatsapp_url)}" target="_blank" rel="noopener">
+          Contacter ${safe(o.shop_name)} sur WhatsApp
+        </a>
+      `).join("")}
+      ${data.tracking_url?`
+        <a class="track" href="${safe(data.tracking_url)}">Consulter le suivi de ma commande</a>
+      `:""}
+    </div>
+    <a href="marketplace.html" class="primary-link" style="display:block;text-align:center;margin-top:18px">Continuer mes achats</a>
+  `;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("noCourier").addEventListener("change",clearCourier);
+$("loadCouriers").addEventListener("click",loadCouriers);
+$("placeOrder").addEventListener("click",placeOrder);
+
+readCart();
+render();
+</script>
+</body>
+</html>
