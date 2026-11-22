@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Réseau | TONDRAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#DDE3DF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:90px}
+a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+svg.defs{position:absolute;width:0;height:0}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.header{background:var(--deep);color:var(--cream);position:relative;overflow:hidden;padding:16px 18px 30px;border-radius:0 0 28px 28px}
+.header .wm{position:absolute;right:-50px;bottom:-60px;width:240px;opacity:.1}
+.hin{position:relative;max-width:700px;margin:auto}
+.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:38px;height:38px}
+.brand b{font-size:21px;font-weight:800;letter-spacing:.04em}
+.brand b i{font-style:normal;color:var(--ochre)}
+.header-icon{width:44px;height:44px;border-radius:14px;background:rgba(251,243,228,.12);display:grid;place-items:center}
+.header h1{font-size:26px;font-weight:800;margin-bottom:6px}
+.header p{color:rgba(251,243,228,.82);font-size:15px}
+.container{max-width:700px;margin:auto;padding:20px 16px}
+.intro{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-left:6px solid var(--ochre);padding:22px 20px;border-radius:20px;margin-bottom:24px;box-shadow:0 10px 30px rgba(20,64,42,.07)}
+.intro h2{font-size:21px;font-weight:800;color:var(--deep);margin-bottom:8px}
+.intro p{color:var(--muted);font-size:15px;line-height:1.65}
+.section-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-heading h2{font-size:19px;font-weight:800;color:var(--deep)}
+.section-heading span{color:var(--muted);font-size:14px;font-weight:600}
+.filters{display:flex;gap:8px;overflow-x:auto;margin-bottom:16px;scrollbar-width:none;padding-bottom:4px}
+.filters::-webkit-scrollbar{display:none}
+.filters button{flex-shrink:0;padding:0 16px;height:40px;background:#fff;border:1.5px solid var(--line);border-radius:999px;font:inherit;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer}
+.filters button.active{background:var(--green);color:#fff;border-color:var(--green)}
+.post{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:20px;overflow:hidden;margin-bottom:16px;box-shadow:0 10px 30px rgba(20,64,42,.07)}
+.post-top{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.admin-avatar{width:44px;height:44px;background:var(--deep);border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+.admin-avatar svg{width:30px;height:30px}
+.post-author{flex:1;min-width:0}
+.post-author strong{display:flex;align-items:center;gap:5px;font-size:15px;color:var(--deep)}
+.post-author strong svg.i{width:16px;height:16px;color:var(--green)}
+.post-author small{color:var(--muted);font-size:13px;display:block;margin-top:2px}
+.post-category{font-size:12px;font-weight:600;background:#FFEFD0;color:#7A5513;padding:6px 11px;border-radius:999px}
+.post-image{width:100%;background:#E3F1E9;max-height:360px;min-height:100px;display:block;object-fit:cover}
+.post-content{padding:16px}
+.post-content h3{font-size:18px;font-weight:800;color:var(--deep);margin-bottom:9px;line-height:1.35}
+.post-content p{color:var(--muted);font-size:15px;line-height:1.7;white-space:pre-wrap}
+.post-link{display:inline-block;background:var(--green);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;margin-top:14px}
+.post-link:hover{background:var(--deep)}
+.post-footer{border-top:1px solid #EEF1EE;padding:12px 16px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between}
+.empty{background:#fff;border:2px dashed #B9C9BF;border-radius:20px;padding:32px 18px;text-align:center}
+.empty-icon{width:60px;height:60px;border-radius:19px;background:#E3F1E9;color:var(--green);display:grid;place-items:center;margin:0 auto 14px}
+.empty-icon svg.i{width:28px;height:28px}
+.empty strong{font-size:17px;color:var(--deep)}
+.empty p{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.6}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid rgba(20,64,42,.12);display:grid;grid-template-columns:repeat(4,1fr);height:72px;padding-bottom:env(safe-area-inset-bottom);z-index:10}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6B7580;font-size:12px;font-weight:600}
+.nav-item.active{color:var(--green)}
+.nav-item.active svg{stroke-width:2.4}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media (min-width:600px){.bottom-nav{left:50%;transform:translateX(-50%);max-width:700px;border-left:1px solid rgba(20,64,42,.12);border-right:1px solid rgba(20,64,42,.12)}}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-dark" viewBox="0 0 120 120">
+<circle cx="60" cy="46" r="26" fill="#F2A83B"/>
+<path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#FBF3E4"/>
+<rect x="12" y="54" width="96" height="10" rx="5" fill="#FBF3E4"/>
+<g fill="#14402A"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g>
+</symbol>
+<symbol id="mark-light" viewBox="0 0 120 120">
+<circle cx="60" cy="46" r="26" fill="#F2A83B"/>
+<path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#FBF3E4"/>
+<rect x="12" y="54" width="96" height="10" rx="5" fill="#FBF3E4"/>
+<g fill="#14402A"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g>
+</symbol>
+<symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 001 1h2l7 4V6L6 10H4a1 1 0 00-1 1z"/><path d="M16.5 9a4 4 0 010 6"/></symbol>
+<symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0M12 19.5h.01"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.5a5 5 0 015 5"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></symbol>
+</defs></svg>
+
+<header class="header">
+  <svg class="wm" viewBox="0 0 120 120" aria-hidden="true"><use href="#mark-light"/></svg>
+  <div class="hin">
+    <div class="header-top">
+      <div class="brand">
+        <svg aria-hidden="true"><use href="#mark-light"/></svg>
+        <b>TOND<i>AA</i>GA</b>
+      </div>
+      <a href="client-profile.html" class="header-icon" aria-label="Mon profil"><svg class="i"><use href="#i-user"/></svg></a>
+    </div>
+    <h1>Réseau</h1>
+    <p>Actualités, annonces et informations de la plateforme</p>
+  </div>
+</header>
+
+<main class="container">
+  <section class="intro">
+    <h2>Bienvenue dans notre réseau !</h2>
+    <p>Retrouvez ici toutes les informations, annonces et nouveautés publiées par TONDRAAGA. Consultez régulièrement cet espace pour ne rien manquer.</p>
+  </section>
+
+  <div class="section-heading">
+    <h2>Publications</h2>
+    <span id="postCount">0 publication</span>
+  </div>
+
+  <div class="filters">
+    <button class="active" data-filter="all">Tout</button>
+    <button data-filter="announcement">Annonces</button>
+    <button data-filter="promotion">Promotions</button>
+    <button data-filter="news">Actualités</button>
+    <button data-filter="tips">Conseils</button>
+  </div>
+
+  <div id="publications">
+    <div class="empty">
+      <div class="empty-icon"><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg></div>
+      <strong>Aucune publication pour le moment</strong>
+      <p>Les prochaines annonces et informations de TONDRAAGA apparaîtront automatiquement ici. Revenez régulièrement consulter cette page.</p>
+    </div>
+  </div>
+</main>
+
+<nav class="bottom-nav" aria-label="Navigation principale">
+  <a href="marketplace.html" class="nav-item"><svg class="i"><use href="#i-home"/></svg><span>Accueil</span></a>
+  <a href="cart.html" class="nav-item"><svg class="i"><use href="#i-cart"/></svg><span>Panier</span></a>
+  <a href="network.html" class="nav-item active" aria-current="page"><svg class="i"><use href="#i-users"/></svg><span>Réseau</span></a>
+  <a href="client-profile.html" class="nav-item"><svg class="i"><use href="#i-user"/></svg><span>Profil</span></a>
+</nav>
+
+<script>
+const API_URL =
+"https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-public";
+
+let allPosts = [];
+let activeFilter = "all";
+
+function escapeHtml(value) {
+    return String(value || "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[char]);
+}
+
+function formatDate(value) {
+    if (!value) return "";
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) return "";
+
+    return date.toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+}
+
+function renderPosts() {
+    const container = document.getElementById("publications");
+
+    const filtered = allPosts.filter(post =>
+        activeFilter === "all" || post.category === activeFilter
+    );
+
+    document.getElementById("postCount").textContent =
+        filtered.length + (filtered.length > 1
+            ? " publications"
+            : " publication");
+
+    if (!filtered.length) {
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon"><svg class="i" aria-hidden="true"><use href="#i-megaphone"/></svg></div>
+                <strong>Aucune publication dans cette catégorie</strong>
+                <p>Les nouvelles publications apparaîtront ici.</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = filtered.map(post => {
+        const image = post.image_url
+            ? `<img class="post-image"
+                src="${escapeHtml(post.image_url)}"
+                alt="Image de la publication"
+                loading="lazy">`
+            : "";
+
+        const link = post.link_url
+            ? `<a class="post-link"
+                href="${escapeHtml(post.link_url)}"
+                target="_blank"
+                rel="noopener noreferrer">
+                ${escapeHtml(post.link_label || "En savoir plus")}
+            </a>`
+            : "";
+
+        return `
+            <article class="post">
+
+                <div class="post-top">
+                    <div class="admin-avatar"><svg aria-hidden="true"><use href="#mark-dark"/></svg></div>
+
+                    <div class="post-author">
+                        <strong>
+                            TONDRAAGA
+                            <svg class="i" aria-label="Compte vérifié" role="img"><use href="#i-check"/></svg>
+                        </strong>
+                        <small>${formatDate(post.published_at)}</small>
+                    </div>
+
+                    <span class="post-category">
+                        ${escapeHtml(post.category_label || "Actualité")}
+                    </span>
+                </div>
+
+                ${image}
+
+                <div class="post-content">
+                    <h3>${escapeHtml(post.title)}</h3>
+                    <p>${escapeHtml(post.content)}</p>
+                    ${link}
+                </div>
+
+                <div class="post-footer">
+                    <span>Publication officielle</span>
+                    <span>TONDRAAGA</span>
+                </div>
+
+            </article>
+        `;
+    }).join("");
+}
+
+document.querySelectorAll(".filters button").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll(".filters button")
+            .forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+        activeFilter = button.dataset.filter;
+        renderPosts();
+    });
+});
+
+async function loadPublications() {
+    const container = document.getElementById("publications");
+
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: "public-posts"
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error("Publications indisponibles");
+        }
+
+        const result = await response.json();
+
+        if (!result.success || !Array.isArray(result.posts)) {
+            throw new Error("Réponse incorrecte du serveur");
+        }
+
+        allPosts = result.posts
+            .filter(post => post.is_published === true)
+            .sort((a, b) =>
+                new Date(b.published_at) - new Date(a.published_at)
+            );
+
+        renderPosts();
+
+    } catch (error) {
+        console.error("Chargement des publications :", error);
+
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon"><svg class="i" aria-hidden="true"><use href="#i-wifi"/></svg></div>
+                <strong>Impossible de charger les publications</strong>
+                <p>
+                    Vérifiez votre connexion et revenez dans
+                    quelques instants.
+                </p>
+            </div>
+        `;
+    }
+}
+
+loadPublications();
+</script>
+</body>
+</html>
