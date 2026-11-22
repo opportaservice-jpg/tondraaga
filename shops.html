@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FBF3E4">
+<title>TONDRAAGA | Boutiques</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#667085;--line:#E2E8E3;--soft:#F1F6F2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:88px}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button,input,select{font:inherit}
+button{cursor:pointer}
+svg.i{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(20,64,42,.09)}
+.header-inner{max-width:980px;margin:auto;padding:13px 16px}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:9px;color:var(--green)}
+.brand-mark{width:39px;height:39px;border-radius:13px;background:var(--green);display:grid;place-items:center;color:var(--ochre);font-size:22px;font-weight:800}
+.brand-name{font-size:20px;font-weight:800;letter-spacing:.035em}
+.brand-name span{color:var(--orange)}
+.actions{display:flex;gap:9px}
+.icon-btn{width:43px;height:43px;border:0;border-radius:14px;background:var(--soft);color:var(--green);display:grid;place-items:center;position:relative}
+.cart-count{position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 4px;border-radius:20px;background:var(--orange);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.page{max-width:980px;margin:auto;padding:20px 16px 28px}
+.backlink{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-size:13px;font-weight:700;margin-bottom:16px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#17472E,#287148);border-radius:25px;padding:25px 22px;color:#fff}
+.hero:after{content:"";position:absolute;width:190px;height:190px;border:27px solid rgba(255,255,255,.07);border-radius:50%;right:-58px;top:-68px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#F8C66E}
+.hero h1{font-size:clamp(25px,5vw,34px);line-height:1.12;margin-top:8px;max-width:470px}
+.hero p{font-size:14px;line-height:1.6;color:rgba(255,255,255,.83);margin-top:9px;max-width:470px}
+.stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.stat{padding:8px 12px;border:1px solid rgba(255,255,255,.19);background:rgba(255,255,255,.09);border-radius:12px;font-size:12px;color:#fff}
+.stat b{font-size:14px;margin-right:4px}
+.toolbar{margin-top:19px;background:#fff;border:1px solid var(--line);border-radius:19px;padding:13px;box-shadow:0 5px 18px rgba(20,64,42,.045)}
+.search{height:48px;display:flex;align-items:center;gap:10px;padding:0 13px;background:#F5F8F5;border:1px solid var(--line);border-radius:13px;color:var(--green)}
+.search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);font-size:14px}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.filters select{height:44px;width:100%;border:1px solid var(--line);border-radius:12px;background:#fff;padding:0 10px;color:var(--ink);font-size:13px;outline:0}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:23px 2px 13px}
+.section-head h2{font-size:19px;color:var(--deep);font-weight:800}
+.section-head p{font-size:12px;color:var(--muted);margin-top:3px}
+.result-count{font-size:12px;color:var(--muted);font-weight:600;white-space:nowrap}
+.shop-grid{display:grid;grid-template-columns:1fr;gap:15px}
+.shop-card{min-width:0;background:#fff;border:1px solid rgba(20,64,42,.10);border-radius:21px;overflow:hidden;box-shadow:0 7px 22px rgba(20,64,42,.06)}
+.cover{height:124px;background:linear-gradient(135deg,#E3F1E9,#BDD9C7);position:relative;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,43,27,.23),transparent 65%);pointer-events:none}
+.shop-body{padding:0 15px 15px}
+.shop-identity{display:flex;align-items:end;gap:11px;margin-top:-31px;position:relative;z-index:1}
+.avatar{width:65px;height:65px;border-radius:19px;background:#fff;border:4px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.10);overflow:hidden;display:grid;place-items:center;color:var(--green);font-size:22px;font-weight:800;flex-shrink:0}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.shop-title{min-width:0;padding-bottom:5px}
+.shop-title h3{font-size:17px;line-height:1.2;color:var(--deep);font-weight:800;overflow-wrap:anywhere}
+.shop-city{display:flex;align-items:center;gap:5px;color:var(--muted);font-size:12px;margin-top:5px}
+.shop-city svg{width:14px;height:14px;color:var(--green)}
+.shop-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:13px}
+.meta-pill{display:inline-flex;align-items:center;gap:5px;padding:7px 9px;border-radius:10px;background:#F3F7F4;color:#385B46;font-size:11px;font-weight:700}
+.meta-pill.rating{background:#FFF6E5;color:#8B5A08}
+.meta-pill svg{width:14px;height:14px}
+.shop-description{font-size:12px;line-height:1.5;color:var(--muted);margin-top:11px}
+.shop-actions{display:flex;gap:9px;margin-top:14px}
+.shop-toggle{flex:1;min-height:45px;border:1px solid var(--green);border-radius:13px;background:var(--green);color:#fff;font-size:13px;font-weight:800;box-shadow:0 5px 12px rgba(20,64,42,.15);display:flex;align-items:center;justify-content:center;gap:8px}
+.shop-toggle:active{transform:scale(.985);background:var(--deep)}
+.shop-toggle svg{width:17px;height:17px}
+.product-panel{display:none;border-top:1px solid var(--line);margin-top:14px;padding-top:13px}
+.product-panel.open{display:block}
+.panel-title{font-size:13px;font-weight:800;color:var(--deep);margin-bottom:10px}
+.mini-products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.mini-product{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff;min-width:0}
+.mini-image{height:105px;background:var(--soft)}
+.mini-image img{width:100%;height:100%;object-fit:cover;display:block}
+.mini-info{padding:8px}
+.mini-name{font-size:11px;font-weight:700;color:var(--deep);line-height:1.35;min-height:30px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mini-price{font-size:12px;color:var(--green);font-weight:800;margin-top:5px}
+.mini-link{display:block;text-align:center;margin-top:8px;padding:8px 5px;border-radius:9px;background:var(--soft);color:var(--green);font-size:11px;font-weight:800}
+.empty{grid-column:1/-1;background:#fff;border:1.5px dashed #C6D4CA;border-radius:19px;padding:29px 18px;text-align:center}
+.empty-icon{width:52px;height:52px;border-radius:17px;background:#E6F1E9;color:var(--green);display:grid;place-items:center;margin:0 auto 12px}
+.empty strong{display:block;color:var(--deep);font-size:16px}
+.empty p{font-size:13px;line-height:1.55;color:var(--muted);margin-top:6px}
+.retry{margin-top:15px;padding:10px 16px;border:0;border-radius:11px;background:var(--green);color:#fff;font-size:13px;font-weight:700}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:72px;padding-bottom:env(safe-area-inset-bottom);z-index:30;background:#fff;border-top:1px solid rgba(20,64,42,.12);display:grid;grid-template-columns:repeat(3,1fr)}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#778078;font-size:11px;font-weight:700}
+.nav-item.active{color:var(--green)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media(min-width:600px){.page{padding-top:26px}.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.cover{height:145px}.shop-body{padding:0 17px 17px}.shop-title h3{font-size:18px}.mini-image{height:125px}}
+@media(min-width:900px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cover{height:155px}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="topline">
+      <a class="brand" href="marketplace.html" aria-label="TONDRAAGA accueil">
+        <span class="brand-mark">T</span><span class="brand-name">TOND<span>RAAGA</span></span>
+      </a>
+      <div class="actions">
+        <a class="icon-btn" href="marketplace.html" aria-label="Accueil"><svg class="i"><use href="#homeIcon"/></svg></a>
+        <a class="icon-btn" href="cart.html" aria-label="Panier"><svg class="i"><use href="#cartIcon"/></svg><span class="cart-count" id="cartCount">0</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <a class="backlink" href="marketplace.html">← Retour à l'accueil</a>
+  <section class="hero">
+    <div class="eyebrow">L'univers TONDRAAGA</div>
+    <h1>Découvrez nos boutiques</h1>
+    <p>Explorez les vendeurs, découvrez leurs produits et trouvez facilement les boutiques qui vous correspondent.</p>
+    <div class="stats">
+      <div class="stat"><b id="heroShopCount">—</b> boutiques</div>
+      <div class="stat"><b id="heroProductCount">—</b> produits disponibles</div>
+    </div>
+  </section>
+
+  <section class="toolbar" aria-label="Rechercher une boutique">
+    <label class="search">
+      <svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="searchInput" type="search" placeholder="Rechercher une boutique ou une ville…" autocomplete="off">
+    </label>
+    <div class="filters">
+      <select id="cityFilter" aria-label="Filtrer par ville"><option value="">Toutes les villes</option></select>
+      <select id="sortFilter" aria-label="Trier les boutiques">
+        <option value="newest">Plus récentes</option>
+        <option value="name">Nom A à Z</option>
+        <option value="products">Plus de produits</option>
+        <option value="rating">Mieux notées</option>
+      </select>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div><h2>Toutes les boutiques</h2><p>Des vendeurs présents sur TONDRAAGA</p></div>
+      <span class="result-count" id="resultCount">Chargement…</span>
+    </div>
+    <div class="shop-grid" id="shopGrid">
+      <div class="empty"><div class="empty-icon"><svg class="i"><use href="#storeIcon"/></svg></div><strong>Chargement des boutiques…</strong><p>Nous récupérons les boutiques publiées.</p></div>
+    </div>
+  </section>
+</main>
+
+<nav class="bottom-nav" aria-label="Navigation principale">
+  <a href="marketplace.html" class="nav-item"><svg class="i" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H5V10"/><path d="M9 20v-6h6v6"/></svg><span>Accueil</span></a>
+  <a href="cart.html" class="nav-item"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h3l2.5 12h11L21 7H6"/></svg><span>Panier</span></a>
+  <a href="network.html" class="nav-item"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2 20a7 7 0 0 1 14 0"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14a5 5 0 0 1 5 5"/></svg><span>Réseau</span></a>
+</nav>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="homeIcon" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H5V10"/><path d="M9 20v-6h6v6"/></symbol>
+  <symbol id="cartIcon" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h3l2.5 12h11L21 7H6"/></symbol>
+  <symbol id="storeIcon" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/></symbol>
+</svg>
+
+<script>
+const SUPABASE_URL = "https://mzcwonizgrdzxikqeagu.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_JDqimevKfqzrgF06tD5JUA_7D_v-PAD";
+const PUBLIC_API = SUPABASE_URL + "/functions/v1/tondraaga-public";
+const CART_KEY = "tondraaga_cart";
+let allShops = [];
+let allProducts = [];
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function money(value) { return Number(value || 0).toLocaleString("fr-FR") + " FCFA"; }
+function getCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch { return []; }
+}
+function updateCartCount() {
+  const total = getCart().reduce((sum,item)=>sum+Number(item.quantity||0),0);
+  document.getElementById("cartCount").textContent = total;
+}
+function initials(name) {
+  return String(name || "T").trim().split(/\s+/).slice(0,2).map(x=>x[0]||"").join("").toUpperCase();
+}
+function emptyState(title,message,withRetry=false) {
+  return `<div class="empty"><div class="empty-icon"><svg class="i"><use href="#storeIcon"/></svg></div><strong>${escapeHtml(title)}</strong><p>${escapeHtml(message)}</p>${withRetry?'<button class="retry" onclick="loadData()">Réessayer</button>':""}</div>`;
+}
+function productMiniCard(product) {
+  const img = product.image_url
+    ? `<img src="${escapeHtml(product.image_url)}" alt="${escapeHtml(product.name)}" loading="lazy">`
+    : "";
+  return `<article class="mini-product">
+    <div class="mini-image">${img}</div>
+    <div class="mini-info">
+      <div class="mini-name">${escapeHtml(product.name || "Produit")}</div>
+      <div class="mini-price">${money(product.price_xof ?? product.price)}</div>
+      <a class="mini-link" href="product.html?id=${encodeURIComponent(product.id)}">Voir le produit</a>
+    </div>
+  </article>`;
+}
+function shopCard(shop) {
+  const cover = shop.cover_image_url
+    ? `<img src="${escapeHtml(shop.cover_image_url)}" alt="Couverture de ${escapeHtml(shop.shop_name)}" loading="lazy">`
+    : "";
+  const avatar = shop.profile_image_url
+    ? `<img src="${escapeHtml(shop.profile_image_url)}" alt="Logo de ${escapeHtml(shop.shop_name)}" loading="lazy">`
+    : escapeHtml(initials(shop.shop_name));
+  const rating = Number(shop.rating_count) > 0
+    ? `<span class="meta-pill rating">★ ${Number(shop.average_rating).toFixed(1)} · ${Number(shop.rating_count)} avis</span>`
+    : `<span class="meta-pill rating">★ Nouvelle boutique</span>`;
+  const products = allProducts.filter(p => p.shop_id === shop.id);
+  const panel = products.length
+    ? `<div class="mini-products">${products.map(productMiniCard).join("")}</div>`
+    : `<p class="shop-description">Cette boutique n'a pas encore de produit publié.</p>`;
+  return `<article class="shop-card">
+    <div class="cover">${cover}</div>
+    <div class="shop-body">
+      <div class="shop-identity">
+        <div class="avatar">${avatar}</div>
+        <div class="shop-title">
+          <h3>${escapeHtml(shop.shop_name || "Boutique TONDRAAGA")}</h3>
+          <div class="shop-city"><svg class="i" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>${escapeHtml(shop.city || "Ville non renseignée")}</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <span class="meta-pill">${Number(shop.product_count)||0} produit${Number(shop.product_count)===1?"":"s"}</span>
+        ${rating}
+      </div>
+      <div class="shop-actions">
+        <button class="shop-toggle" type="button" aria-expanded="false" data-shop-id="${escapeHtml(shop.id)}">
+          <svg class="i" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/></svg>
+          Voir les produits
+        </button>
+      </div>
+      <div class="product-panel" id="panel-${escapeHtml(shop.id)}">
+        <div class="panel-title">Produits de ${escapeHtml(shop.shop_name || "la boutique")}</div>
+        ${panel}
+      </div>
+    </div>
+  </article>`;
+}
+function renderShops(list) {
+  const grid = document.getElementById("shopGrid");
+  document.getElementById("resultCount").textContent = list.length + " boutique" + (list.length===1?"":"s");
+  if (!list.length) {
+    grid.innerHTML = emptyState("Aucune boutique trouvée","Essayez un autre nom ou choisissez une autre ville.");
+    return;
+  }
+  grid.innerHTML = list.map(shopCard).join("");
+  grid.querySelectorAll(".shop-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      const panel = document.getElementById("panel-" + button.dataset.shopId);
+      const opening = !panel.classList.contains("open");
+      panel.classList.toggle("open", opening);
+      button.setAttribute("aria-expanded", String(opening));
+      button.innerHTML = opening
+        ? '<svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/></svg>Masquer les produits'
+        : '<svg class="i" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/></svg>Voir les produits';
+    });
+  });
+}
+function applyFilters() {
+  const term = document.getElementById("searchInput").value.trim().toLocaleLowerCase("fr");
+  const city = document.getElementById("cityFilter").value;
+  const sort = document.getElementById("sortFilter").value;
+  let list = allShops.filter(shop => {
+    const matchesText = !term || `${shop.shop_name||""} ${shop.city||""}`.toLocaleLowerCase("fr").includes(term);
+    return matchesText && (!city || shop.city === city);
+  });
+  if (sort==="name") list.sort((a,b)=>String(a.shop_name).localeCompare(String(b.shop_name),"fr"));
+  if (sort==="products") list.sort((a,b)=>Number(b.product_count)-Number(a.product_count));
+  if (sort==="rating") list.sort((a,b)=>Number(b.average_rating)-Number(a.average_rating));
+  if (sort==="newest") list.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  renderShops(list);
+}
+function fillCities() {
+  const select = document.getElementById("cityFilter");
+  const cities = [...new Set(allShops.map(s=>s.city).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"fr"));
+  select.innerHTML = '<option value="">Toutes les villes</option>' + cities.map(city=>`<option value="${escapeHtml(city)}">${escapeHtml(city)}</option>`).join("");
+}
+async function postAction(payload) {
+  const response = await fetch(PUBLIC_API,{
+    method:"POST",
+    headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY},
+    body:JSON.stringify(payload)
+  });
+  const data = await response.json().catch(()=>({}));
+  if (!response.ok || data.success !== true) throw new Error(data.error || data.message || "Erreur de chargement.");
+  return data;
+}
+async function loadData() {
+  document.getElementById("shopGrid").innerHTML = emptyState("Chargement des boutiques…","Nous récupérons les boutiques publiées.");
+  document.getElementById("resultCount").textContent = "Chargement…";
+  try {
+    const [shopsData,productsData] = await Promise.all([
+      postAction({action:"public-shops",page:1,limit:60}),
+      postAction({action:"public-products",page:1,limit:40})
+    ]);
+    allShops = Array.isArray(shopsData.shops) ? shopsData.shops : [];
+    allProducts = Array.isArray(productsData.products) ? productsData.products : [];
+    document.getElementById("heroShopCount").textContent = Number(shopsData.total ?? allShops.length).toLocaleString("fr-FR");
+    document.getElementById("heroProductCount").textContent = allShops.reduce((sum,s)=>sum+Number(s.product_count||0),0).toLocaleString("fr-FR");
+    fillCities();
+    applyFilters();
+  } catch(error) {
+    console.error("TONDRAAGA boutiques:",error);
+    document.getElementById("shopGrid").innerHTML = emptyState("Chargement impossible",error.message || "Vérifiez votre connexion puis réessayez.",true);
+    document.getElementById("resultCount").textContent = "Erreur";
+  }
+}
+document.getElementById("searchInput").addEventListener("input",applyFilters);
+document.getElementById("cityFilter").addEventListener("change",applyFilters);
+document.getElementById("sortFilter").addEventListener("change",applyFilters);
+updateCartCount();
+loadData();
+</script>
+</body>
+</html>
