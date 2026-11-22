@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Suivi de commande | TONDAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F5A93C;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#E3E8E4;--soft:#F3F7F4;--red:#A3231A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',system-ui,Arial,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit}
+[hidden]{display:none!important}
+svg.defs{position:absolute;width:0;height:0}
+
+/* En-tête */
+.header{background:var(--deep);color:var(--cream);position:relative;overflow:hidden;padding:22px 18px 40px;border-radius:0 0 30px 30px}
+.header .wm{position:absolute;right:-70px;bottom:-90px;width:260px;opacity:.04}
+.hin{position:relative;max-width:760px;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand .mark{width:54px;height:50px;flex-shrink:0}
+.wordmark{font-weight:800;font-size:28px;letter-spacing:.03em;line-height:1}
+.wordmark i{font-style:normal;color:var(--ochre)}
+.tagline{font-size:10px;font-weight:600;letter-spacing:.32em;color:rgba(251,243,228,.72);margin-top:7px}
+.secure{display:inline-flex;align-items:center;gap:7px;background:rgba(251,243,228,.12);border-radius:999px;padding:8px 13px;font-size:12px;font-weight:600;color:var(--cream);white-space:nowrap}
+.secure svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hero{margin-top:30px}
+.hero h1{font-size:28px;font-weight:800;line-height:1.15}
+.hero p{margin-top:8px;font-size:15px;color:rgba(251,243,228,.82);line-height:1.55;max-width:560px}
+
+/* Contenu */
+main{max-width:760px;margin:22px auto 0;padding:0 16px 24px}
+.panel{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:22px;padding:24px 22px;box-shadow:0 12px 34px rgba(20,64,42,.08);margin-bottom:16px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.reference{font-size:22px;font-weight:800;color:var(--deep);margin-top:6px;overflow-wrap:anywhere;letter-spacing:.01em}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.metric{background:var(--soft);border-radius:16px;padding:15px}
+.metric small{display:block;color:var(--muted);font-size:12px;font-weight:600;margin-bottom:6px}
+.metric strong{font-size:17px;font-weight:800;color:var(--deep)}
+.metric.total{background:var(--deep)}
+.metric.total small{color:rgba(251,243,228,.75)}
+.metric.total strong{color:var(--cream)}
+.actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px}
+.primary{flex:1 1 220px;height:52px;border:none;border-radius:14px;background:var(--green);color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:background .15s}
+.primary:hover{background:var(--deep)}
+.primary:disabled{opacity:.6;cursor:wait}
+#updated{font-size:13px;color:var(--muted);font-weight:500}
+
+.section-title{font-size:18px;font-weight:800;color:var(--deep);margin:26px 4px 14px}
+
+/* Boutiques */
+.shop-card{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:20px;padding:18px;margin-bottom:12px;box-shadow:0 8px 24px rgba(20,64,42,.06)}
+.shop-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.shop-name{font-size:17px;font-weight:800;color:var(--deep)}
+.status{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:700;background:#EEF1EF;color:#4A5563;white-space:nowrap}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.status.confirmed,.status.completed{background:#E3F1E9;color:var(--green)}
+.status.refused,.status.cancelled{background:#FDECEA;color:var(--red)}
+.status.in_discussion{background:#E8F0FD;color:#2B58B8}
+.status.pending_contact{background:#FFF1D6;color:#8A5410}
+.detail{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.55}
+.amount{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:13px;margin-top:14px;font-size:14px;color:var(--muted)}
+.amount strong{color:var(--deep);font-size:16px;font-weight:800}
+.empty{color:var(--muted);font-size:14px}
+
+.notice{display:flex;gap:10px;background:#FFF4DD;color:#7A5513;border-radius:14px;padding:14px 16px;margin-top:20px;font-size:13px;line-height:1.6}
+.notice svg{width:20px;height:20px;flex-shrink:0;margin-top:1px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+
+/* Messages */
+#message{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:22px;padding:34px 20px;text-align:center;color:var(--muted);font-size:15px;line-height:1.6;box-shadow:0 12px 34px rgba(20,64,42,.08)}
+#message.error{background:#FDECEA;border-color:#F6CFCB;color:var(--red);text-align:left;padding:18px 20px;font-size:14px;font-weight:500}
+.spinner{width:30px;height:30px;border:3px solid var(--line);border-top-color:var(--green);border-radius:50%;margin:0 auto 14px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Pied de page */
+footer{max-width:760px;margin:0 auto;padding:22px 16px 34px;text-align:center}
+footer .brand{justify-content:center;gap:10px;color:var(--deep)}
+footer .mark{width:34px;height:32px}
+footer .wordmark{font-size:19px}
+footer .wordmark i{color:var(--orange)}
+footer .tagline{color:var(--muted);font-size:8px;margin-top:5px;text-align:left}
+footer p{font-size:12px;color:var(--muted);margin-top:12px}
+
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media(max-width:560px){
+  .hero h1{font-size:24px}.wordmark{font-size:24px}.brand .mark{width:46px;height:43px}
+  .top{flex-direction:column;align-items:flex-start;gap:16px}
+  .summary{grid-template-columns:1fr 1fr}.metric.total{grid-column:1/-1}
+  .panel{padding:20px 16px}
+  .shop-head{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-dark" viewBox="0 0 140 130">
+  <circle cx="70" cy="60" r="28" fill="#F5A93C"/>
+  <g stroke="#F5A93C" stroke-width="5" stroke-linecap="round"><path d="M70 23V14M96.2 33.8l6.3-6.3M43.8 33.8l-6.3-6.3M107 60h9M33 60h-9"/></g>
+  <rect x="20" y="74" width="100" height="12" rx="6" fill="#FBF3E4"/>
+  <path d="M28 88H112L102 126Q101 130 97 130H43Q39 130 38 126Z" fill="#FBF3E4"/>
+  <g fill="#14402A"><path d="M50 91l7 7-7 7-7-7z"/><path d="M70 91l7 7-7 7-7-7z"/><path d="M90 91l7 7-7 7-7-7z"/><path d="M60 105l7 7-7 7-7-7z"/><path d="M80 105l7 7-7 7-7-7z"/></g>
+</symbol>
+<symbol id="mark-light" viewBox="0 0 140 130">
+  <circle cx="70" cy="60" r="28" fill="#F5A93C"/>
+  <g stroke="#F5A93C" stroke-width="5" stroke-linecap="round"><path d="M70 23V14M96.2 33.8l6.3-6.3M43.8 33.8l-6.3-6.3M107 60h9M33 60h-9"/></g>
+  <rect x="20" y="74" width="100" height="12" rx="6" fill="#14402A"/>
+  <path d="M28 88H112L102 126Q101 130 97 130H43Q39 130 38 126Z" fill="#1F5B3A"/>
+  <g fill="#F5A93C"><path d="M50 91l7 7-7 7-7-7z"/><path d="M70 91l7 7-7 7-7-7z"/><path d="M90 91l7 7-7 7-7-7z"/><path d="M60 105l7 7-7 7-7-7z"/><path d="M80 105l7 7-7 7-7-7z"/></g>
+</symbol>
+</defs></svg>
+
+<header class="header">
+  <svg class="wm" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-dark"/></svg>
+  <div class="hin">
+    <div class="top">
+      <a class="brand" href="index.html" aria-label="TONDAAGA, marché africain">
+        <svg class="mark" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-dark"/></svg>
+        <div>
+          <div class="wordmark">TOND<i>AA</i>GA</div>
+          <div class="tagline">MARCHÉ AFRICAIN</div>
+        </div>
+      </a>
+      <span class="secure"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Suivi sécurisé de commande</span>
+    </div>
+    <div class="hero">
+      <h1>Suivi de votre commande</h1>
+      <p>Consultez ici l'avancement de chaque boutique. Les validations sont effectuées par les vendeurs.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div id="message"><div class="spinner"></div>Chargement du suivi…</div>
+  <div id="content" hidden>
+    <section class="panel">
+      <div class="eyebrow">Référence de commande</div>
+      <div class="reference" id="reference">—</div>
+      <div class="summary">
+        <div class="metric"><small>Articles</small><strong id="subtotal">—</strong></div>
+        <div class="metric"><small>Livraison</small><strong id="delivery">—</strong></div>
+        <div class="metric total"><small>Total</small><strong id="total">—</strong></div>
+      </div>
+      <div class="actions">
+        <button class="primary" id="refresh" type="button">Actualiser le suivi</button>
+        <span id="updated"></span>
+      </div>
+    </section>
+
+    <div class="section-title">État par boutique</div>
+    <div id="shops"></div>
+
+    <div class="notice">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+      <span>Vous pouvez consulter les statuts ici, mais vous ne pouvez pas les modifier. Chaque vendeur confirme, refuse ou met à jour uniquement les articles de sa boutique. Pour une commande de plusieurs boutiques, les statuts peuvent donc être différents.</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-light"/></svg>
+    <div>
+      <div class="wordmark">TOND<i>AA</i>GA</div>
+      <div class="tagline">MARCHÉ AFRICAIN</div>
+    </div>
+  </div>
+  <p>© TONDAAGA · Votre marché africain en ligne</p>
+</footer>
+
+<script>
+const API = "https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-public";
+const params = new URLSearchParams(location.search);
+const ref = (params.get("ref") || "").trim();
+const token = (params.get("token") || "").trim();
+const $ = id => document.getElementById(id);
+const money = n => (Number(n)||0).toLocaleString("fr-FR") + " FCFA";
+const statusInfo = {
+  pending_contact: ["En attente de réponse", "pending_contact"],
+  in_discussion: ["En discussion", "in_discussion"],
+  confirmed: ["Commande confirmée", "confirmed"],
+  refused: ["Commande refusée", "refused"],
+  cancelled: ["Commande annulée", "cancelled"],
+  completed: ["Commande terminée", "completed"]
+};
+function dateLabel(value){
+  if(!value) return "Date non disponible";
+  const d=new Date(value);
+  return Number.isNaN(d.getTime()) ? "" : d.toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"});
+}
+function showError(text){
+  $("message").hidden=false;
+  $("message").className="error";
+  $("message").textContent=text;
+  $("content").hidden=true;
+}
+function render(order){
+  $("reference").textContent=order.order_reference || ref;
+  $("subtotal").textContent=money(order.items_subtotal_xof);
+  $("delivery").textContent=money(order.delivery_total_xof);
+  $("total").textContent=money(order.grand_total_xof);
+  const subs=Array.isArray(order.seller_orders)?order.seller_orders:[];
+  $("shops").innerHTML="";
+  if(!subs.length){
+    $("shops").innerHTML='<div class="shop-card empty">Aucune boutique associée à cette commande.</div>';
+  } else {
+    for(const shop of subs){
+      const key=shop.status || "pending_contact";
+      const info=statusInfo[key] || ["Statut en cours de traitement",""];
+      const name=shop.shop?.shop_name || "Boutique";
+      const card=document.createElement("section");
+      card.className="shop-card";
+      const head=document.createElement("div");head.className="shop-head";
+      const title=document.createElement("div");title.className="shop-name";title.textContent=name;
+      const badge=document.createElement("span");badge.className="status "+info[1];badge.textContent=info[0];
+      head.append(title,badge);card.append(head);
+      const date=document.createElement("div");date.className="detail";date.textContent="Commande reçue le "+dateLabel(shop.created_at);
+      card.append(date);
+      const amounts=document.createElement("div");amounts.className="amount";
+      const left=document.createElement("span");left.textContent="Montant de cette boutique";
+      const right=document.createElement("strong");right.textContent=money(shop.seller_order_total_xof);
+      amounts.append(left,right);card.append(amounts);
+      $("shops").append(card);
+    }
+  }
+  $("message").hidden=true;$("content").hidden=false;
+  $("updated").textContent="Mis à jour : "+new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+}
+async function load(){
+  if(!ref || !token){showError("Lien de suivi incomplet. Vérifiez que l'adresse contient bien la référence et le jeton de suivi.");return;}
+  $("refresh").disabled=true;$("refresh").textContent="Actualisation…";
+  try{
+    const response=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"order-track",order_reference:ref,tracking_token:token})});
+    const data=await response.json();
+    if(!response.ok || !data.success || !data.order) throw new Error(data.error || "Impossible de charger le suivi.");
+    render(data.order);
+  }catch(error){
+    showError(error.message || "Erreur de connexion. Réessayez dans quelques instants.");
+  }finally{
+    $("refresh").disabled=false;$("refresh").textContent="Actualiser le suivi";
+  }
+}
+$("refresh").addEventListener("click",load);
+load();
+</script>
+</body>
+</html>
