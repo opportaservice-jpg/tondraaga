@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Accueil vendeur | TONDRAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:90px}
+a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+button{-webkit-tap-highlight-color:transparent}
+svg.defs{position:absolute;width:0;height:0}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.header{background:var(--deep);color:var(--cream);position:relative;overflow:hidden;padding:18px 18px 34px;border-radius:0 0 28px 28px}
+.header .wm{position:absolute;right:-50px;bottom:-60px;width:240px;opacity:.1}
+.hin{position:relative;max-width:650px;margin:auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:38px;height:38px}
+.brand b{font-size:21px;font-weight:800;letter-spacing:.04em}
+.brand b i{font-style:normal;color:var(--ochre)}
+.actions{display:flex;gap:10px}
+.actions a{width:44px;height:44px;border-radius:14px;background:rgba(251,243,228,.12);display:grid;place-items:center}
+.welcome{font-size:26px;font-weight:800;margin-bottom:6px}
+.welcome-sub{color:rgba(251,243,228,.82);font-size:15px;line-height:1.5}
+.shop-line{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:8px 14px;border-radius:999px;background:rgba(251,243,228,.14);font-size:14px;font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:#4ADE80}
+.container{padding:22px 16px;max-width:650px;margin:auto}
+.section-title{font-size:18px;font-weight:800;color:var(--deep);margin:26px 0 14px}
+.container>.section-title:first-of-type{margin-top:4px}
+
+/* NOUVEAU DESIGN DES 4 BLOCS */
+.stats{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:14px;
+align-items:stretch;
+}
+.stat-card{
+position:relative;
+min-width:0;
+min-height:155px;
+padding:17px 16px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+background:#fff;
+border:1px solid rgba(20,64,42,.09);
+border-radius:20px;
+box-shadow:0 5px 18px rgba(20,64,42,.055);
+overflow:hidden;
+transition:transform .2s ease,box-shadow .2s ease;
+}
+.stat-card:active{transform:scale(.985)}
+.stat-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:17px;
+}
+.tile{
+width:44px;
+height:44px;
+border-radius:14px;
+display:grid;
+place-items:center;
+background:#E3F1E9;
+color:var(--green);
+margin-bottom:14px;
+}
+.stat-top .tile{margin:0}
+.tile.o{background:#FFF1D8;color:#98610B}
+.stat-number{
+font-size:29px;
+line-height:1.15;
+font-weight:800;
+letter-spacing:-.7px;
+color:var(--deep);
+margin-bottom:7px;
+overflow-wrap:anywhere;
+}
+.stat-label{
+color:#596477;
+font-size:13px;
+line-height:1.35;
+font-weight:600;
+}
+.stat-card:after{
+content:"";
+position:absolute;
+bottom:0;
+left:16px;
+right:16px;
+height:3px;
+border-radius:5px 5px 0 0;
+background:#E3F1E9;
+}
+.stat-card:nth-child(even):after{background:#F8E7C7}
+.stat-number small{font-size:14px;color:#687386;font-weight:600;letter-spacing:0}
+@media(max-width:360px){
+.stats{gap:10px}
+.stat-card{padding:14px 12px;min-height:148px}
+.stat-number{font-size:25px}
+.stat-label{font-size:12px}
+}
+/* FIN DU NOUVEAU DESIGN */
+
+.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.action-card,.shop-card,.activity-card{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:18px;box-shadow:0 8px 24px rgba(20,64,42,.06)}
+.action-card{padding:14px;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:var(--deep);min-height:72px;transition:border-color .15s}
+.action-card:hover{border-color:var(--green)}
+.action-card .tile{margin:0}
+.action-card.primary{background:var(--green);color:#fff;border-color:var(--green)}
+.action-card.primary .tile{background:var(--ochre);color:var(--deep)}
+.shop-card{padding:18px}
+.shop-card-title{font-size:18px;font-weight:800;color:var(--deep);margin-bottom:6px}
+.shop-card-text{color:var(--muted);font-size:14px;line-height:1.6}
+.shop-link{display:inline-block;margin-top:14px;font-size:14px;color:var(--green);font-weight:600;padding:10px 16px;border:1.5px solid var(--green);border-radius:12px}
+.shop-link:hover{background:var(--green);color:#fff}
+.activity-card{padding:18px}
+.activity-empty{text-align:center;padding:22px 10px;color:var(--muted);font-size:14px;line-height:1.6}
+.activity-empty .tile{margin:0 auto 12px}
+.activity-list{display:flex;flex-direction:column;gap:12px}
+.activity-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(20,64,42,.1)}
+.activity-item:last-child{border-bottom:0;padding-bottom:0}
+.activity-icon{width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:#E3F1E9;color:var(--green);display:grid;place-items:center}
+.activity-main{min-width:0;flex:1}
+.activity-title{font-weight:800;color:var(--deep);font-size:14px;overflow-wrap:anywhere}
+.activity-meta{font-size:12px;color:var(--muted);line-height:1.5;margin-top:3px}
+.activity-amount{font-size:13px;font-weight:800;color:var(--deep);white-space:nowrap}
+.status-pill{display:inline-block;margin-top:5px;padding:3px 8px;border-radius:999px;background:#E3F1E9;color:#1F5B3A;font-size:11px;font-weight:700}
+.status-pill.pending{background:#FFF2D6;color:#805500}
+.status-pill.refused{background:#FDECEC;color:#A3231A}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid rgba(20,64,42,.12);display:grid;grid-template-columns:repeat(2,1fr);z-index:100;padding-bottom:env(safe-area-inset-bottom)}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6B7580;font-size:12px;font-weight:600}
+.nav-item.active{color:var(--green)}
+.nav-item.active svg{stroke-width:2.4}
+.loader{position:fixed;inset:0;background:var(--cream);display:flex;flex-direction:column;gap:14px;justify-content:center;align-items:center;z-index:500;font-weight:600;color:var(--deep)}
+.loader svg{width:72px;height:72px}
+.message{display:none;margin:0 0 16px;padding:13px 14px;border-radius:12px;font-size:14px;background:#FDECEC;color:#A3231A}
+.logout{border:none;background:transparent;color:#A3231A;font:inherit;font-weight:600;font-size:14px;padding:12px 16px;cursor:pointer}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media (min-width:650px){.bottom-nav{left:50%;transform:translateX(-50%);max-width:650px;border-left:1px solid rgba(20,64,42,.12);border-right:1px solid rgba(20,64,42,.12)}}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-dark" viewBox="0 0 120 120"><circle cx="60" cy="46" r="26" fill="#F2A83B"/><path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#1F5B3A"/><rect x="12" y="54" width="96" height="10" rx="5" fill="#14402A"/><g fill="#F2A83B"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g></symbol>
+<symbol id="mark-light" viewBox="0 0 120 120"><circle cx="60" cy="46" r="26" fill="#F2A83B"/><path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#FBF3E4"/><rect x="12" y="54" width="96" height="10" rx="5" fill="#FBF3E4"/><g fill="#14402A"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 003.4 0"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><polygon points="12,3 14.7,9 21,9.6 16.2,13.9 17.7,20.2 12,16.9 6.3,20.2 7.8,13.9 3,9.6 9.3,9"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h13v4"/><path d="M3 7v11a2 2 0 002 2h15a1 1 0 001-1v-9a1 1 0 00-1-1H5a2 2 0 01-2-2z"/><path d="M16 14.5h.01"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></symbol>
+<symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></symbol>
+</defs></svg>
+<div class="loader" id="loader"><svg aria-hidden="true"><use href="#mark-dark"/></svg><span>Chargement...</span></div>
+<header class="header"><svg class="wm" viewBox="0 0 120 120" aria-hidden="true"><use href="#mark-light"/></svg><div class="hin"><div class="topbar"><div class="brand"><svg aria-hidden="true"><use href="#mark-light"/></svg><b>TOND<i>AA</i>GA</b></div><div class="actions"><a href="notifications.html" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg></a></div></div><div class="welcome">Bonjour, bienvenue !</div><div class="welcome-sub">Gérez votre boutique et développez votre activité.</div><div class="shop-line"><span class="dot"></span><span id="shopName">Espace vendeur</span></div></div></header>
+<main class="container">
+<div class="message" id="message" role="alert"></div>
+<h2 class="section-title">Vue d'ensemble</h2>
+<section class="stats">
+<div class="stat-card">
+<div class="stat-top"><div class="tile"><svg class="i"><use href="#i-box"/></svg></div></div>
+<div><div class="stat-number" id="productsCount">…</div><div class="stat-label">Produits publiés</div></div>
+</div>
+<div class="stat-card">
+<div class="stat-top"><div class="tile o"><svg class="i"><use href="#i-bag"/></svg></div></div>
+<div><div class="stat-number" id="ordersCount">…</div><div class="stat-label">Commandes reçues</div></div>
+</div>
+<div class="stat-card">
+<div class="stat-top"><div class="tile"><svg class="i"><use href="#i-check"/></svg></div></div>
+<div><div class="stat-number" id="salesCount">…</div><div class="stat-label">Ventes confirmées</div></div>
+</div>
+<div class="stat-card">
+<div class="stat-top"><div class="tile o"><svg class="i"><use href="#i-star"/></svg></div></div>
+<div><div class="stat-number" id="rating">…</div><div class="stat-label">Note moyenne</div></div>
+</div>
+</section>
+<h2 class="section-title">Gestion rapide</h2>
+<section class="quick-actions">
+<a class="action-card primary" href="add-product.html"><span class="tile"><svg class="i"><use href="#i-plus"/></svg></span><span>Ajouter un produit</span></a>
+<a class="action-card" href="my-products.html"><span class="tile"><svg class="i"><use href="#i-box"/></svg></span><span>Mes produits</span></a>
+<a class="action-card" href="seller-orders.html"><span class="tile o"><svg class="i"><use href="#i-cart"/></svg></span><span>Mes commandes</span></a>
+<a class="action-card" href="seller-sales.html"><span class="tile o"><svg class="i"><use href="#i-wallet"/></svg></span><span>Mes ventes</span></a>
+</section>
+<h2 class="section-title">Ma boutique</h2>
+<section class="shop-card"><div class="shop-card-title" id="shopCardName">Ma boutique</div><div class="shop-card-text" id="shopCity">Gérez les informations et la présentation de votre boutique.</div><a href="my-shop.html" class="shop-link">Gérer ma boutique</a></section>
+<h2 class="section-title">Activité récente</h2>
+<section class="activity-card"><div class="activity-empty" id="activityEmpty"><div class="tile"><svg class="i"><use href="#i-clip"/></svg></div><div>Chargement de votre activité…</div></div><div class="activity-list" id="activityList" hidden></div></section>
+<div style="text-align:center;margin-top:22px"><button class="logout" id="logoutBtn">Se déconnecter</button></div>
+</main>
+<nav class="bottom-nav" aria-label="Navigation principale"><a href="seller-dashboard.html" class="nav-item active" aria-current="page"><svg class="i"><use href="#i-home"/></svg><span>Accueil</span></a><a href="profile.html" class="nav-item"><svg class="i"><use href="#i-user"/></svg><span>Profil</span></a></nav>
+<script>
+const AUTH_URL="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-auth";
+const PUBLIC_URL="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-public";
+const SUPABASE_PUBLIC_KEY="sb_publishable_JDqimevKfqzrgF06tD5JUA_7D_v-PAD";
+const TOKEN_KEY="tondraaga_session_token";
+const loader=document.getElementById("loader");
+const message=document.getElementById("message");
+const money=n=>new Intl.NumberFormat("fr-FR").format(Number(n)||0)+" FCFA";
+function showMessage(text){message.textContent=text;message.style.display="block";}
+function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function statusLabel(status){return ({pending_contact:"En attente de contact",in_discussion:"En discussion",confirmed:"Confirmée",refused:"Refusée",cancelled:"Annulée",completed:"Terminée"})[status]||status||"Statut inconnu";}
+function statusClass(status){if(status==="refused"||status==="cancelled")return "refused";if(status==="pending_contact"||status==="in_discussion")return "pending";return "";}
+function formatDate(value){if(!value)return "Date inconnue";const d=new Date(value);if(Number.isNaN(d.getTime()))return "Date inconnue";return new Intl.DateTimeFormat("fr-FR",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(d);}
+async function authApi(action){const token=localStorage.getItem(TOKEN_KEY);const response=await fetch(AUTH_URL,{method:"POST",headers:{"Content-Type":"application/json",...(token?{"Authorization":"Bearer "+token}:{})},body:JSON.stringify({action})});let data;try{data=await response.json();}catch{throw new Error("Réponse invalide du serveur d'authentification.");}if(!response.ok||data.success===false)throw new Error(data.error||data.message||"Session invalide.");return data;}
+async function publicApi(action,body={}){const token=localStorage.getItem(TOKEN_KEY);const response=await fetch(PUBLIC_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLIC_KEY,"x-session-token":token||""},body:JSON.stringify({action,...body})});let data;try{data=await response.json();}catch{throw new Error("Réponse invalide du serveur des données.");}if(!response.ok||data.success===false)throw new Error(data.error||data.message||"Impossible de charger les données.");return data;}
+async function fetchAllSellerOrders(){const first=await publicApi("seller-orders",{page:1,limit:50});let orders=Array.isArray(first.orders)?first.orders:[];const total=Number(first.total)||orders.length;const pages=Math.min(1000,Math.ceil(total/50));for(let page=2;page<=pages;page++){const next=await publicApi("seller-orders",{page,limit:50});orders=orders.concat(Array.isArray(next.orders)?next.orders:[]);}return orders;}
+async function fetchAllPublishedProducts(sellerId){const first=await publicApi("public-products",{page:1,limit:40});let products=Array.isArray(first.products)?first.products:[];const total=Number(first.total)||products.length;const pages=Math.min(1000,Math.ceil(total/40));for(let page=2;page<=pages;page++){const next=await publicApi("public-products",{page,limit:40});products=products.concat(Array.isArray(next.products)?next.products:[]);}return products.filter(p=>p.seller_id===sellerId).length;}
+function renderActivity(orders){const list=document.getElementById("activityList"),empty=document.getElementById("activityEmpty");const recent=[...orders].sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0)).slice(0,5);if(!recent.length){list.hidden=true;empty.hidden=false;empty.innerHTML='<div class="tile"><svg class="i"><use href="#i-clip"/></svg></div><div>Aucune activité à afficher pour le moment.</div><div>Vos nouvelles commandes apparaîtront ici.</div>';return;}empty.hidden=true;list.hidden=false;list.innerHTML=recent.map(order=>{const ref=escapeHtml(order.order_reference||"Commande");const buyer=escapeHtml(order.buyer?.name||"Client");const city=escapeHtml(order.buyer?.city||"");const status=escapeHtml(statusLabel(order.status));const amount=money(order.total_xof);const date=formatDate(order.created_at);const cls=statusClass(order.status);return `<article class="activity-item"><div class="activity-icon"><svg class="i"><use href="#i-bag"/></svg></div><div class="activity-main"><div class="activity-title">Commande ${ref}</div><div class="activity-meta">${buyer}${city?" · "+city:""}<br>${date}</div><span class="status-pill ${cls}">${status}</span></div><div class="activity-amount">${amount}</div></article>`;}).join("");}
+async function loadDashboard(){const token=localStorage.getItem(TOKEN_KEY);if(!token){window.location.replace("login.html");return;}let session;try{session=await authApi("session");}catch(error){localStorage.removeItem(TOKEN_KEY);window.location.replace("login.html");return;}const seller=session.seller||session.data?.seller||{};const shop=session.shop||session.data?.shop||{};const shopName=shop.shop_name||seller.shop_name;if(shopName){document.getElementById("shopName").textContent=shopName;document.getElementById("shopCardName").textContent=shopName;}if(shop.city)document.getElementById("shopCity").textContent="Ville : "+shop.city;
+try{const [productCount,orders,reviews]=await Promise.all([fetchAllPublishedProducts(seller.id),fetchAllSellerOrders(),publicApi("seller-reviews",{page:1,limit:1})]);document.getElementById("productsCount").textContent=String(productCount);document.getElementById("ordersCount").textContent=String(orders.length);const sales=orders.filter(o=>o.status==="confirmed"||o.status==="completed").length;document.getElementById("salesCount").textContent=String(sales);const average=Number(reviews.average_rating)||0;const reviewCount=Number(reviews.rating_count)||0;document.getElementById("rating").textContent=reviewCount?average.toFixed(1)+" / 5":"Pas encore notée";renderActivity(orders);}catch(error){showMessage("Certaines statistiques n'ont pas pu être chargées : "+error.message);document.getElementById("activityEmpty").hidden=false;document.getElementById("activityEmpty").innerHTML='<div class="tile"><svg class="i"><use href="#i-clip"/></svg></div><div>Impossible de charger l’activité récente.</div><div>Réessayez dans quelques instants.</div>';}
+loader.style.display="none";}
+document.getElementById("logoutBtn").addEventListener("click",async()=>{try{if(localStorage.getItem(TOKEN_KEY))await authApi("logout");}catch(error){console.error("Erreur de déconnexion :",error);}finally{localStorage.removeItem(TOKEN_KEY);window.location.replace("index.html");}});
+loadDashboard();
+</script>
+</body>
+</html>
+                                                                                                                                                           </html>
+                                                                                                                                                           
