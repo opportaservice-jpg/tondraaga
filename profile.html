@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Mon profil | TONDRAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:95px}
+a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+svg.defs{position:absolute;width:0;height:0}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.header{background:var(--deep);color:var(--cream);position:relative;overflow:hidden;padding:18px 18px 70px;border-radius:0 0 28px 28px}
+.header .wm{position:absolute;right:-50px;bottom:-60px;width:240px;opacity:.1}
+.hin{position:relative;max-width:650px;margin:auto}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.brand svg{width:38px;height:38px}
+.brand b{font-size:21px;font-weight:800;letter-spacing:.04em}
+.brand b i{font-style:normal;color:var(--ochre)}
+.header h1{font-size:26px;font-weight:800;margin-bottom:6px}
+.header p{color:rgba(251,243,228,.82);font-size:15px}
+.container{max-width:650px;margin:-48px auto 0;padding:0 16px 20px;position:relative}
+.profile-card,.menu-card{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:20px;box-shadow:0 10px 30px rgba(20,64,42,.08)}
+.profile-card{padding:18px;display:flex;align-items:center;gap:16px}
+.avatar{width:72px;height:72px;border-radius:50%;background:#E3F1E9;color:var(--green);border:3px solid var(--ochre);display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+.avatar svg.i{width:32px;height:32px}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profile-info{flex:1;min-width:0}
+.profile-name{font-size:19px;font-weight:800;color:var(--deep);overflow-wrap:anywhere}
+.profile-phone{color:var(--muted);font-size:14px;margin-top:4px}
+.profile-status{display:inline-block;background:#E3F1E9;color:var(--green);padding:5px 11px;border-radius:999px;font-size:12px;font-weight:600;margin-top:9px}
+.section-title{font-size:18px;font-weight:800;color:var(--deep);margin:26px 0 12px}
+.menu-card{overflow:hidden}
+.menu-item{min-height:68px;padding:12px 16px;display:flex;align-items:center;gap:14px;border-bottom:1px solid #EEF1EE;transition:background .15s}
+.menu-item:last-child{border-bottom:none}
+.menu-item:hover{background:#F6FAF7}
+.menu-icon{width:42px;height:42px;background:#E3F1E9;color:var(--green);border-radius:13px;display:grid;place-items:center;flex-shrink:0}
+.menu-icon.o{background:#FFEFD0;color:#8A5A00}
+.menu-text{flex:1;min-width:0}
+.menu-title{font-size:15px;font-weight:600;color:var(--deep)}
+.menu-description{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4}
+.arrow{color:#9AA5A0}
+.logout-btn{width:100%;margin-top:26px;height:52px;border:1.5px solid #F0C4C0;background:#fff;border-radius:12px;color:#A3231A;font:inherit;font-weight:600;font-size:15px;cursor:pointer}
+.logout-btn:hover{background:#FDECEC}
+.version{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:72px;padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid rgba(20,64,42,.12);display:grid;grid-template-columns:repeat(4,1fr);z-index:100}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6B7580;font-size:12px;font-weight:600}
+.nav-item.active{color:var(--green)}
+.nav-item.active svg{stroke-width:2.4}
+.loader{position:fixed;inset:0;background:var(--cream);display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;z-index:500;font-weight:600;color:var(--deep)}
+.loader svg{width:72px;height:72px}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media (min-width:650px){.bottom-nav{left:50%;transform:translateX(-50%);max-width:650px;width:100%;border-left:1px solid rgba(20,64,42,.12);border-right:1px solid rgba(20,64,42,.12)}}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-dark" viewBox="0 0 120 120">
+<circle cx="60" cy="46" r="26" fill="#F2A83B"/>
+<path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#1F5B3A"/>
+<rect x="12" y="54" width="96" height="10" rx="5" fill="#14402A"/>
+<g fill="#F2A83B"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g>
+</symbol>
+<symbol id="mark-light" viewBox="0 0 120 120">
+<circle cx="60" cy="46" r="26" fill="#F2A83B"/>
+<path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#FBF3E4"/>
+<rect x="12" y="54" width="96" height="10" rx="5" fill="#FBF3E4"/>
+<g fill="#14402A"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g>
+</symbol>
+<symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h13v4"/><path d="M3 7v11a2 2 0 002 2h15a1 1 0 001-1v-9a1 1 0 00-1-1H5a2 2 0 01-2-2z"/><path d="M16 14.5h.01"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><polygon points="12,3 14.7,9 21,9.6 16.2,13.9 17.7,20.2 12,16.9 6.3,20.2 7.8,13.9 3,9.6 9.3,9"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.5a5 5 0 015 5"/></symbol>
+</defs></svg>
+
+<div class="loader" id="loader">
+  <svg aria-hidden="true"><use href="#mark-dark"/></svg>
+  <span>Chargement...</span>
+</div>
+
+<header class="header">
+  <svg class="wm" viewBox="0 0 120 120" aria-hidden="true"><use href="#mark-light"/></svg>
+  <div class="hin">
+    <div class="brand">
+      <svg aria-hidden="true"><use href="#mark-light"/></svg>
+      <b>TOND<i>AA</i>GA</b>
+    </div>
+    <h1>Mon profil</h1>
+    <p>Gérez votre compte et votre boutique.</p>
+  </div>
+</header>
+
+<main class="container">
+  <section class="profile-card">
+    <div class="avatar" id="avatar"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></div>
+    <div class="profile-info">
+      <div class="profile-name" id="profileName">Mon compte vendeur</div>
+      <div class="profile-phone" id="profilePhone">Chargement des informations...</div>
+      <div class="profile-status">Compte vendeur</div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Ma boutique</h2>
+  <section class="menu-card">
+    <a href="my-shop.html" class="menu-item">
+      <div class="menu-icon"><svg class="i"><use href="#i-store"/></svg></div>
+      <div class="menu-text"><div class="menu-title">Ma boutique</div><div class="menu-description">Nom, présentation, photos et informations</div></div>
+      <svg class="i arrow"><use href="#i-next"/></svg>
+    </a>
+    <a href="my-products.html" class="menu-item">
+      <div class="menu-icon"><svg class="i"><use href="#i-box"/></svg></div>
+      <div class="menu-text"><div class="menu-title">Mes produits</div><div class="menu-description">Consulter et modifier mes produits</div></div>
+      <svg class="i arrow"><use href="#i-next"/></svg>
+    </a>
+    <a href="add-product.html" class="menu-item">
+      <div class="menu-icon"><svg class="i"><use href="#i-plus"/></svg></div>
+      <div class="menu-text"><div class="menu-title">Ajouter un produit</div><div class="menu-description">Publier un nouveau produit</div></div>
+      <svg class="i arrow"><use href="#i-next"/></svg>
+    </a>
+  </section>
+
+  <h2 class="section-title">Mes activités</h2>
+  <section class="menu-card">
+    <a href="seller-orders.html" class="menu-item">
+      <div class="menu-icon o"><svg class="i"><use href="#i-bag"/></svg></div>
+      <div class="menu-text"><div class="menu-title">Mes commandes</div><div class="menu-description">Consulter les demandes des clients</div></div>
+      <svg class="i arrow"><use href="#i-next"/></svg>
+    </a>
+    <a href="seller-sales.html" class="menu-item">
+      <div class="menu-icon o"><svg class="i"><use href="#i-wallet"/></svg></div>
+      <div class="menu-text"><div class="menu-title">Historique des ventes</div><div class="menu-description">Ventes confirmées et historique</div></div>
+      <svg class="i arrow"><use href="#i-next"/></svg>
+    </a>
+    <a href="seller-reviews.html" class="menu-item">
+      <div class="menu-icon o"><svg class="i"><use href="#i-star"/></svg></div>
+      <div class="menu-text"><div class="menu-title">Mes évaluations</div><div class="menu-description">Notes et commentaires des clients</div></div>
+      <svg class="i arrow"><use href="#i-next"/></svg>
+    </a>
+  </section>
+
+  <h2 class="section-title">Mon compte</h2>
+  <section class="menu-card">
+    <a href="edit-profile.html" class="menu-item">
+      <div class="menu-icon"><svg class="i"><use href="#i-user"/></svg></div>
+      <div class="menu-text"><div class="menu-title">Informations personnelles</div><div class="menu-description">Modifier mes informations</div></div>
+      <svg class="i arrow"><use href="#i-next"/></svg>
+    </a>
+    <a href="settings.html" class="menu-item">
+      <div class="menu-icon"><svg class="i"><use href="#i-shield"/></svg></div>
+      <div class="menu-text"><div class="menu-title">Paramètres</div><div class="menu-description">Sécurité et préférences du compte</div></div>
+      <svg class="i arrow"><use href="#i-next"/></svg>
+    </a>
+  </section>
+
+  <button class="logout-btn" id="logoutBtn">Se déconnecter</button>
+  <div class="version">TONDRAAGA · Espace vendeur</div>
+</main>
+
+<nav class="bottom-nav" aria-label="Navigation principale">
+  <a href="seller-dashboard.html" class="nav-item"><svg class="i"><use href="#i-home"/></svg><span>Accueil</span></a>
+  <a href="cart.html" class="nav-item"><svg class="i"><use href="#i-cart"/></svg><span>Panier</span></a>
+  <a href="network.html" class="nav-item"><svg class="i"><use href="#i-users"/></svg><span>Réseau</span></a>
+  <a href="profile.html" class="nav-item active" aria-current="page"><svg class="i"><use href="#i-user"/></svg><span>Profil</span></a>
+</nav>
+
+<script>
+const API_URL =
+"https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-auth";
+
+const TOKEN_KEY = "tondraaga_session_token";
+
+async function api(action) {
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            ...(token ? {
+                "Authorization": "Bearer " + token
+            } : {})
+        },
+        body: JSON.stringify({ action })
+    });
+
+    let data;
+
+    try {
+        data = await response.json();
+    } catch {
+        throw new Error("Réponse invalide du serveur.");
+    }
+
+    if (!response.ok || data.success === false) {
+        throw new Error(
+            data.error || data.message || "Session invalide."
+        );
+    }
+
+    return data;
+}
+
+async function loadProfile() {
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    if (!token) {
+        window.location.replace("login.html");
+        return;
+    }
+
+    try {
+        const result = await api("session");
+
+        const seller =
+            result.seller || result.data?.seller || {};
+
+        const shop =
+            result.shop || result.data?.shop || {};
+
+        const name =
+            shop.shop_name ||
+            seller.shop_name ||
+            "Mon compte vendeur";
+
+        document.getElementById("profileName").textContent = name;
+
+        const country = seller.country_calling_code || "";
+        const phone = seller.phone_number || "";
+
+        document.getElementById("profilePhone").textContent =
+            country + (phone ? " " + phone : "");
+
+        if (shop.profile_image_url) {
+            const avatar = document.getElementById("avatar");
+            const img = document.createElement("img");
+            img.src = shop.profile_image_url;
+            img.alt = "Photo de la boutique";
+            avatar.replaceChildren(img);
+        }
+
+    } catch (error) {
+        localStorage.removeItem(TOKEN_KEY);
+        window.location.replace("login.html");
+        return;
+    } finally {
+        document.getElementById("loader").style.display = "none";
+    }
+}
+
+document.getElementById("logoutBtn").addEventListener(
+    "click",
+    async () => {
+        const button = document.getElementById("logoutBtn");
+        button.disabled = true;
+        button.textContent = "Déconnexion...";
+
+        try {
+            if (localStorage.getItem(TOKEN_KEY)) {
+                await api("logout");
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            localStorage.removeItem(TOKEN_KEY);
+            window.location.replace("index.html");
+        }
+    }
+);
+
+loadProfile();
+</script>
+</body>
+</html>
