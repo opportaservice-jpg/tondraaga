@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Connexion vendeur | TONDRAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#DDE3DF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+svg.defs{position:absolute;width:0;height:0}
+header{background:var(--deep);height:68px;padding:0 6%;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:42px;height:42px}
+.brand b{font-size:23px;font-weight:800;letter-spacing:.04em;color:var(--cream)}
+.brand b i{font-style:normal;color:var(--ochre)}
+.back{color:var(--cream);font-weight:600;font-size:14px;text-decoration:none;border:1.5px solid rgba(251,243,228,.4);padding:8px 15px;border-radius:999px}
+.back:hover,.back:focus-visible{background:var(--cream);color:var(--deep)}
+.split{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+aside{background:var(--green);color:var(--cream);position:relative;overflow:hidden;padding:64px 8%;display:flex;flex-direction:column;justify-content:center}
+aside .wm{position:absolute;right:-90px;bottom:-70px;width:420px;opacity:.12}
+aside h1{font-size:clamp(30px,3.4vw,44px);font-weight:800;line-height:1.12;margin-bottom:18px;position:relative}
+aside p{font-size:17px;line-height:1.65;color:rgba(251,243,228,.82);max-width:440px;position:relative}
+.formside{padding:48px 6%;display:flex;align-items:center;justify-content:center}
+.formwrap{width:100%;max-width:470px}
+.mob{display:none;text-align:center;margin-bottom:22px}
+.mob h1{font-size:28px;font-weight:800;color:var(--deep);margin-bottom:8px}
+.mob p{font-size:15px;line-height:1.6;color:var(--muted)}
+.card{background:#fff;border:1.5px solid rgba(20,64,42,.12);border-radius:22px;padding:32px 28px;box-shadow:0 14px 40px rgba(20,64,42,.1)}
+.form-title{font-size:22px;font-weight:800;color:var(--deep);margin-bottom:6px}
+.form-description{color:var(--muted);font-size:14px;margin-bottom:24px}
+.field{margin-bottom:18px}
+label{display:block;font-size:14px;font-weight:600;color:var(--deep);margin-bottom:8px}
+input,select{width:100%;height:50px;padding:0 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font:inherit;font-size:15px;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(31,91,58,.14)}
+input[readonly]{background:#F3F6F4;font-weight:600;color:var(--deep)}
+.phone-group{display:grid;grid-template-columns:110px 1fr;gap:10px}
+.password-wrap{position:relative}
+.password-wrap input{padding-right:84px}
+.toggle-password{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--green);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:8px}
+.submit-btn{width:100%;height:54px;background:var(--green);color:#fff;border:0;border-radius:12px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;margin-top:4px;transition:background .15s}
+.submit-btn:hover{background:var(--deep)}
+.submit-btn:disabled{opacity:.65;cursor:not-allowed}
+.error,.success{display:none;padding:13px 14px;border-radius:12px;font-size:14px;line-height:1.5;margin-bottom:18px}
+.error{background:#FDECEC;color:#A3231A}
+.success{background:#E5F5EC;color:var(--green)}
+.links{text-align:center;margin-top:22px;font-size:14px;line-height:2;color:var(--muted)}
+.links a{color:var(--green);font-weight:600}
+footer{background:var(--deep);color:rgba(251,243,228,.75);text-align:center;font-size:13px;padding:20px}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+input:focus-visible,select:focus-visible{outline:none}
+@media (max-width:900px){.split{grid-template-columns:1fr}aside{display:none}.mob{display:block}.formside{padding:32px 16px 40px}}
+@media (max-width:420px){header{padding:0 16px;height:62px}.brand svg{width:36px;height:36px}.brand b{font-size:19px}.card{padding:24px 18px}.phone-group{grid-template-columns:96px 1fr}}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-light" viewBox="0 0 120 120">
+<circle cx="60" cy="46" r="26" fill="#F2A83B"/>
+<path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#FBF3E4"/>
+<rect x="12" y="54" width="96" height="10" rx="5" fill="#FBF3E4"/>
+<g fill="#14402A"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g>
+</symbol>
+</defs></svg>
+
+<header>
+  <a class="brand" href="index.html" aria-label="TONDRAAGA, accueil">
+    <svg aria-hidden="true"><use href="#mark-light"/></svg>
+    <b>TOND<i>AA</i>GA</b>
+  </a>
+  <a href="index.html" class="back">Retour</a>
+</header>
+
+<div class="split">
+  <aside>
+    <svg class="wm" viewBox="0 0 120 120" aria-hidden="true"><use href="#mark-light"/></svg>
+    <h1>Heureux de vous revoir !</h1>
+    <p>Connectez-vous à votre espace vendeur pour retrouver votre boutique et gérer vos activités.</p>
+  </aside>
+
+  <main class="formside">
+    <div class="formwrap">
+      <div class="mob">
+        <h1>Heureux de vous revoir !</h1>
+        <p>Connectez-vous à votre espace vendeur pour gérer votre boutique.</p>
+      </div>
+
+      <section class="card">
+        <h2 class="form-title">Connexion vendeur</h2>
+        <p class="form-description">Entrez vos informations de connexion.</p>
+
+        <div class="error" id="error" role="alert"></div>
+        <div class="success" id="success" role="status"></div>
+
+        <form id="loginForm">
+          <div class="field">
+            <label for="country">Pays</label>
+            <select id="country" required>
+              <option value="+226">🇧🇫 Burkina Faso (+226)</option>
+              <option value="+225">🇨🇮 Côte d'Ivoire (+225)</option>
+              <option value="+223">🇲🇱 Mali (+223)</option>
+              <option value="+227">🇳🇪 Niger (+227)</option>
+              <option value="+228">🇹🇬 Togo (+228)</option>
+              <option value="+229">🇧🇯 Bénin (+229)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="phone">Numéro de téléphone</label>
+            <div class="phone-group">
+              <input type="text" id="callingCode" value="+226" readonly aria-label="Indicatif du pays">
+              <input type="tel" id="phone" placeholder="Votre numéro" autocomplete="tel-national" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="password">Mot de passe</label>
+            <div class="password-wrap">
+              <input type="password" id="password" placeholder="Votre mot de passe" autocomplete="current-password" required>
+              <button type="button" class="toggle-password" id="togglePassword" aria-label="Afficher le mot de passe">Voir</button>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Se connecter</button>
+        </form>
+
+        <div class="links">
+          Vous n'avez pas encore de compte ?<br>
+          <a href="register.html">Créer un compte vendeur</a>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<footer>TONDRAAGA · Espace vendeur</footer>
+
+<script>
+const API_URL =
+"https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-auth";
+
+const TOKEN_KEY = "tondraaga_session_token";
+
+const country = document.getElementById("country");
+const callingCode = document.getElementById("callingCode");
+const phone = document.getElementById("phone");
+const password = document.getElementById("password");
+const form = document.getElementById("loginForm");
+const submitBtn = document.getElementById("submitBtn");
+const errorBox = document.getElementById("error");
+const successBox = document.getElementById("success");
+
+country.addEventListener("change", () => {
+    callingCode.value = country.value;
+});
+
+document.getElementById("togglePassword")
+.addEventListener("click", () => {
+    const visible = password.type === "password";
+    password.type = visible ? "text" : "password";
+
+    const toggle = document.getElementById("togglePassword");
+    toggle.textContent = visible ? "Masquer" : "Voir";
+    toggle.setAttribute(
+        "aria-label",
+        visible ? "Masquer le mot de passe" : "Afficher le mot de passe"
+    );
+});
+
+function showError(message) {
+    errorBox.textContent = message;
+    errorBox.style.display = "block";
+    successBox.style.display = "none";
+}
+
+function showSuccess(message) {
+    successBox.textContent = message;
+    successBox.style.display = "block";
+    errorBox.style.display = "none";
+}
+
+async function api(action, body = {}) {
+    const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            action,
+            ...body
+        })
+    });
+
+    let result;
+
+    try {
+        result = await response.json();
+    } catch {
+        throw new Error("Le serveur a envoyé une réponse invalide.");
+    }
+
+    if (!response.ok || result.success === false) {
+        throw new Error(
+            result.error ||
+            result.message ||
+            "Connexion impossible."
+        );
+    }
+
+    return result;
+}
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+
+    const countryCode = country.value;
+    const phoneNumber = phone.value.trim();
+    const userPassword = password.value;
+
+    if (!phoneNumber || !userPassword) {
+        showError("Veuillez remplir tous les champs.");
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Connexion en cours...";
+
+    try {
+        const result = await api("login", {
+            country_calling_code: countryCode,
+            phone_number: phoneNumber,
+            password: userPassword
+        });
+
+        const token = result.session?.token;
+
+        if (!token) {
+            throw new Error(
+                "Le serveur n'a pas retourné de session valide."
+            );
+        }
+
+        localStorage.setItem(TOKEN_KEY, token);
+
+        showSuccess("Connexion réussie. Ouverture de votre boutique...");
+
+        window.location.replace("seller-dashboard.html");
+
+    } catch (error) {
+        showError(error.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Se connecter";
+    }
+});
+
+// Vérifier si une session existe déjà.
+async function checkExistingSession() {
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    if (!token) return;
+
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify({
+                action: "session"
+            })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success !== false) {
+            window.location.replace("seller-dashboard.html");
+        } else {
+            localStorage.removeItem(TOKEN_KEY);
+        }
+
+    } catch (error) {
+        console.error("Vérification de session impossible :", error);
+    }
+}
+
+checkExistingSession();
+</script>
+</body>
+</html>
