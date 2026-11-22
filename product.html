@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Détails du produit | TONDRAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#DDE3DF}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:96px}
+a{-webkit-tap-highlight-color:transparent}
+svg.defs{position:absolute;width:0;height:0}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+header{background:var(--deep);color:var(--cream);height:68px;padding:0 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
+.back,.cart-link{width:44px;height:44px;border-radius:14px;background:rgba(251,243,228,.12);display:grid;place-items:center;color:var(--cream);border:0;cursor:pointer;text-decoration:none}
+header h2{font-size:19px;font-weight:600;flex:1}
+.container{max-width:650px;margin:auto;padding:14px 14px 0}
+.gallery,.content{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:20px;box-shadow:0 10px 30px rgba(20,64,42,.07);margin-bottom:14px}
+.gallery{overflow:hidden}
+.main-image{width:100%;height:340px;object-fit:contain;background:#E3F1E9;cursor:zoom-in;display:block}
+.thumbnails{display:flex;gap:10px;overflow-x:auto;padding:12px}
+.thumb{width:66px;height:66px;object-fit:cover;border:2px solid transparent;border-radius:10px;cursor:pointer;flex-shrink:0}
+.thumb.active{border-color:var(--green)}
+.content{padding:20px}
+.name{font-size:24px;font-weight:800;line-height:1.25;color:var(--deep)}
+.category{display:inline-block;background:#FFEFD0;color:#7A5513;font-size:13px;font-weight:600;padding:5px 12px;border-radius:999px;margin-top:10px}
+.price{color:var(--green);font-size:30px;font-weight:800;margin-top:14px}
+.section-title{font-size:18px;font-weight:800;color:var(--deep);margin-bottom:12px}
+.description{font-size:15px;line-height:1.7;color:var(--muted);white-space:pre-wrap}
+.shop{display:flex;align-items:center;gap:14px}
+.shop-avatar{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#E3F1E9;border:3px solid var(--ochre)}
+.shop-info{flex:1;min-width:0}
+.shop-info strong{display:block;margin-bottom:4px;font-size:17px;color:var(--deep)}
+.shop-info small{color:var(--muted);font-size:14px;display:flex;align-items:center;gap:4px}
+.shop-info small svg.i{width:15px;height:15px}
+.shop-link{color:var(--green);font-weight:600;font-size:14px;text-decoration:none;border:1.5px solid var(--green);padding:9px 16px;border-radius:12px}
+.shop-link:hover{background:var(--green);color:#fff}
+.reviews{font-size:15px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.reviews svg.i{color:var(--ochre);fill:var(--ochre)}
+.action{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid rgba(20,64,42,.12);display:flex;gap:10px;z-index:10}
+.action .inner{max-width:650px;margin:auto;width:100%;display:flex}
+.add{flex:1;background:var(--green);color:#fff;border:0;border-radius:12px;height:54px;font:inherit;font-weight:600;font-size:16px;cursor:pointer;transition:background .15s}
+.add:hover{background:var(--deep)}
+.add:disabled{background:#9AA5A0;cursor:not-allowed}
+.notice{padding:14px;background:#FFF4DD;color:#7A5513;border-radius:12px;font-size:14px;line-height:1.55}
+.loading{text-align:center;padding:48px;color:var(--muted)}
+.loading svg{width:64px;height:64px;display:block;margin:0 auto 12px}
+#zoom{display:none;position:fixed;inset:0;z-index:30;background:rgba(20,64,42,.96);align-items:center;justify-content:center}
+#zoom img{max-width:100%;max-height:90%;object-fit:contain}
+#zoom button{position:absolute;top:20px;right:20px;background:var(--cream);border:0;border-radius:50%;width:44px;height:44px;font-size:24px;cursor:pointer;color:var(--deep)}
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);background:var(--deep);color:#fff;padding:13px 20px;border-radius:999px;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:40;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-dark" viewBox="0 0 120 120">
+<circle cx="60" cy="46" r="26" fill="#F2A83B"/>
+<path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#1F5B3A"/>
+<rect x="12" y="54" width="96" height="10" rx="5" fill="#14402A"/>
+<g fill="#F2A83B"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g>
+</symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><polygon points="12,3 14.7,9 21,9.6 16.2,13.9 17.7,20.2 12,16.9 6.3,20.2 7.8,13.9 3,9.6 9.3,9"/></symbol>
+</defs></svg>
+
+<header>
+  <button class="back" onclick="history.back()" aria-label="Retour"><svg class="i"><use href="#i-back"/></svg></button>
+  <h2>Détails du produit</h2>
+  <a class="cart-link" href="cart.html" aria-label="Panier"><svg class="i"><use href="#i-cart"/></svg></a>
+</header>
+
+<div class="container" id="page">
+  <div class="loading"><svg aria-hidden="true"><use href="#mark-dark"/></svg>Chargement du produit...</div>
+</div>
+
+<div id="zoom" onclick="closeZoom()">
+  <button aria-label="Fermer">×</button>
+  <img id="zoomImage" alt="Photo agrandie">
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const API = "https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-public";
+const params = new URLSearchParams(location.search);
+const productId = params.get("id");
+
+const page = document.getElementById("page");
+let product = null;
+let photos = [];
+let activePhoto = 0;
+
+function money(value){
+  return Number(value || 0).toLocaleString("fr-FR") + " FCFA";
+}
+
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+function showToast(message){
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2200);
+}
+
+function showError(message){
+  page.innerHTML = `
+    <div class="content">
+      <div class="notice">${escapeHTML(message)}</div>
+      <p style="margin-top:18px">
+        <a href="marketplace.html" style="color:#1F5B3A;font-weight:600">
+          Retour à l'accueil
+        </a>
+      </p>
+    </div>`;
+}
+
+async function loadProduct(){
+  if(!productId){
+    showError("Aucun produit sélectionné. Retournez à l'accueil et choisissez un produit.");
+    return;
+  }
+
+  try{
+    const response = await fetch(API,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        action:"product-detail",
+        product_id:productId
+      })
+    });
+
+    const result = await response.json();
+
+    if(!response.ok || !result.success){
+      throw new Error(result.message || "Impossible de charger ce produit.");
+    }
+
+    product = result.product || result.data?.product;
+
+    if(!product){
+      throw new Error("Ce produit est introuvable.");
+    }
+
+    photos = Array.isArray(product.images)
+      ? product.images.map(img => typeof img === "string" ? img : img.image_url).filter(Boolean)
+      : [];
+
+    if(product.main_image_url && !photos.includes(product.main_image_url)){
+      photos.unshift(product.main_image_url);
+    }
+
+    if(product.image_url && !photos.includes(product.image_url)){
+      photos.unshift(product.image_url);
+    }
+
+    if(!photos.length){
+      photos = ["https://placehold.co/600x600?text=Photo+indisponible"];
+    }
+
+    renderProduct();
+
+  }catch(error){
+    showError(error.message || "Une erreur est survenue.");
+  }
+}
+
+function renderProduct(){
+  const shop = product.shop || {};
+  const name = escapeHTML(product.name || "Produit");
+  const price = money(product.price);
+  const description = escapeHTML(product.description || "Aucune description disponible pour le moment.");
+  const shopName = escapeHTML(shop.shop_name || "Boutique");
+  const city = escapeHTML(shop.city || "Ville non renseignée");
+
+  page.innerHTML = `
+    <div class="gallery">
+      <img id="mainImage" class="main-image"
+        src="${escapeHTML(photos[0])}"
+        alt="${name}"
+        onclick="openZoom()">
+
+      <div class="thumbnails">
+        ${photos.map((url,index)=>`
+          <img class="thumb ${index===0?"active":""}"
+            src="${escapeHTML(url)}"
+            alt="Photo ${index+1}"
+            onclick="selectPhoto(${index})">
+        `).join("")}
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="name">${name}</div>
+      <div class="category">${escapeHTML(product.category || "Autre catégorie")}</div>
+      <div class="price">${price}</div>
+    </div>
+
+    <div class="content">
+      <div class="section-title">Description du produit</div>
+      <div class="description">${description}</div>
+    </div>
+
+    <div class="content">
+      <div class="section-title">Informations sur la boutique</div>
+      <div class="shop">
+        <img class="shop-avatar"
+          src="${escapeHTML(shop.profile_image_url || "https://placehold.co/100x100?text=B")}"
+          alt="Boutique">
+        <div class="shop-info">
+          <strong>${shopName}</strong>
+          <small><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>${city}</small>
+        </div>
+        ${shop.id ? `<a class="shop-link" href="shop.html?id=${encodeURIComponent(shop.id)}">Voir</a>` : ""}
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section-title">Avis des clients</div>
+      <p class="reviews">
+        ${product.rating_count
+          ? `<svg class="i" aria-hidden="true"><use href="#i-star"/></svg>Note : ` + Number(product.average_rating || 0).toFixed(1) + "/5 (" + Number(product.rating_count) + " avis)"
+          : "Aucun avis pour le moment."}
+      </p>
+    </div>
+
+    <div class="action">
+      <div class="inner">
+        <button class="add" id="addButton"
+          ${product.is_active === false ? "disabled" : ""}
+          onclick="addToCart()">
+          ${product.is_active === false ? "Produit indisponible" : "Ajouter au panier"}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function selectPhoto(index){
+  if(!photos[index]) return;
+  activePhoto = index;
+  document.getElementById("mainImage").src = photos[index];
+
+  document.querySelectorAll(".thumb").forEach((thumb,i)=>{
+    thumb.classList.toggle("active",i===index);
+  });
+}
+
+function openZoom(){
+  document.getElementById("zoomImage").src = photos[activePhoto];
+  document.getElementById("zoom").style.display = "flex";
+}
+
+function closeZoom(){
+  document.getElementById("zoom").style.display = "none";
+}
+
+function addToCart(){
+  if(!product || product.is_active === false) return;
+
+  let cart = [];
+  try{
+    cart = JSON.parse(localStorage.getItem("tondraaga_cart") || "[]");
+    if(!Array.isArray(cart)) cart = [];
+  }catch(e){
+    cart = [];
+  }
+
+  const existing = cart.find(item => String(item.product_id) === String(product.id));
+
+  if(existing){
+    existing.quantity = Number(existing.quantity || 1) + 1;
+  }else{
+    cart.push({
+      product_id:product.id,
+      name:product.name,
+      price:Number(product.price),
+      image:photos[0],
+      image_url:photos[0],
+      shop_id:product.shop_id || product.shop?.id || null,
+      shop_name:product.shop?.shop_name || "",
+      quantity:1
+    });
+  }
+
+  localStorage.setItem("tondraaga_cart",JSON.stringify(cart));
+
+  const count = cart.reduce((sum,item)=>sum+Number(item.quantity || 1),0);
+  localStorage.setItem("tondraaga_cart_count",String(count));
+
+  showToast("Produit ajouté au panier");
+}
+
+loadProduct();
+</script>
+</body>
+</html>
