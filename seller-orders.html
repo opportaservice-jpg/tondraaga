@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#14402A">
+<title>Mes commandes | TONDAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F5A93C;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#E3E8E4;--soft:#F3F7F4;--red:#A3231A}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',system-ui,Arial,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+button,a,select{font:inherit}a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+svg.defs{position:absolute;width:0;height:0}
+
+/* En-tête */
+.top{background:var(--deep);color:var(--cream);position:relative;overflow:hidden;padding:18px 18px 36px;border-radius:0 0 30px 30px}
+.top .wm{position:absolute;right:-70px;bottom:-90px;width:260px;opacity:.04}
+.topin{position:relative;max-width:760px;margin:auto}
+.back{display:inline-flex;align-items:center;gap:8px;background:rgba(251,243,228,.12);color:var(--cream);font-size:14px;font-weight:600;padding:9px 14px;border-radius:999px;margin-bottom:22px}
+.back svg{width:18px;height:18px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand .mark{width:54px;height:50px;flex-shrink:0}
+.wordmark{font-weight:800;font-size:28px;letter-spacing:.03em;line-height:1}
+.wordmark i{font-style:normal;color:var(--ochre)}
+.tagline{font-size:10px;font-weight:600;letter-spacing:.32em;color:rgba(251,243,228,.72);margin-top:7px}
+.hero{margin-top:28px}
+h1{font-size:28px;font-weight:800;line-height:1.15;margin-bottom:8px}
+.subtitle{font-size:15px;color:rgba(251,243,228,.82);line-height:1.55;max-width:540px}
+
+/* Contenu */
+.wrap{max-width:760px;margin:22px auto 0;padding:0 16px 10px}
+.notice{display:flex;gap:10px;background:#FFF4DD;color:#7A5513;padding:14px 16px;border-radius:14px;font-size:13px;line-height:1.6;margin:0 0 18px}
+.notice svg{width:20px;height:20px;flex-shrink:0;margin-top:1px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+.filter{flex:1;min-width:0;height:50px;border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:0 14px;color:var(--deep);font-size:15px;font-weight:500;outline:none}
+.filter:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(31,91,58,.14)}
+.refresh{height:50px;border:0;border-radius:12px;background:var(--green);color:#fff;padding:0 20px;font-weight:600;font-size:15px;cursor:pointer;transition:background .15s}
+.refresh:hover{background:var(--deep)}
+.summary{font-size:13px;color:var(--muted);font-weight:500;margin:0 4px 14px}
+
+/* Commandes */
+.order{background:#fff;border:1.5px solid rgba(20,64,42,.1);border-radius:20px;margin-bottom:14px;overflow:hidden;box-shadow:0 10px 30px rgba(20,64,42,.07)}
+.order-head{padding:18px 18px 12px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.ref{font-weight:800;color:var(--deep);font-size:17px;overflow-wrap:anywhere;letter-spacing:.01em}
+.date{font-size:13px;color:var(--muted);margin-top:4px}
+.status{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;padding:7px 12px;border-radius:999px;white-space:nowrap;background:#EEF1EF;color:#4A5563}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.status.pending_contact{background:#FFF1D6;color:#8A5410}
+.status.in_discussion{background:#E8F0FD;color:#2B58B8}
+.status.confirmed,.status.completed{background:#E3F1E9;color:var(--green)}
+.status.refused,.status.cancelled{background:#FDECEA;color:var(--red)}
+.order-mid{padding:0 18px 16px}
+.buyer{font-size:15px;font-weight:700;color:var(--deep)}
+.meta{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.6}
+.total-row{border-top:1px solid var(--line);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--soft)}
+.total-label{font-size:13px;color:var(--muted);font-weight:500}
+.total{font-size:19px;font-weight:800;color:var(--deep);white-space:nowrap}
+.actions{display:flex;gap:8px;padding:14px 18px 18px;flex-wrap:wrap}
+.action{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:12px;min-height:44px;padding:0 10px;font-size:14px;font-weight:600;border:1.5px solid var(--line);background:#fff;color:var(--deep);cursor:pointer;min-width:112px;transition:background .15s,border-color .15s}
+.action:hover{background:var(--soft);border-color:#CBD6CE}
+.action.primary{background:var(--green);border-color:var(--green);color:#fff}
+.action.primary:hover{background:var(--deep);border-color:var(--deep)}
+.action.danger{background:#fff;border-color:#F0C9C6;color:var(--red)}
+.action.danger:hover{background:#FDECEA}
+.action:disabled{opacity:.55;cursor:wait}
+
+/* Détails */
+.details{display:none;border-top:1px solid var(--line);padding:16px 18px 18px;background:#FCFDFC}
+.details.open{display:block}
+.detail-title{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:18px 0 10px}
+.detail-title:first-child{margin-top:0}
+.item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #EEF2EF}
+.item:last-child{border-bottom:0}
+.item img,.placeholder{width:56px;height:56px;border-radius:12px;object-fit:cover;background:#E3F1E9;flex-shrink:0}
+.placeholder{display:grid;place-items:center;color:var(--green)}
+.item-info{flex:1;min-width:0}
+.item-name{font-size:14px;font-weight:600;color:var(--deep);overflow-wrap:anywhere}
+.item-sub{font-size:13px;color:var(--muted);margin-top:3px}
+.item-price{font-size:14px;font-weight:700;color:var(--deep);white-space:nowrap}
+.buyer-box{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;font-size:14px;line-height:1.7;color:#3B4656}
+
+/* États */
+.empty,.error{background:#fff;border:1.5px dashed #C9D6CC;border-radius:20px;padding:38px 20px;text-align:center;color:var(--muted)}
+.empty b,.error b{display:block;color:var(--deep);font-size:17px;margin-bottom:6px}
+.empty p,.error p{font-size:14px;line-height:1.55}
+.error{background:#FDECEA;border:1.5px solid #F6CFCB;border-style:solid}
+.error b{color:var(--red)}.error p{color:var(--red)}
+.loader{position:fixed;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;z-index:20;color:var(--deep);font-weight:600}
+.spin{width:26px;height:26px;border:3px solid #D9E4DC;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin-right:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Pied de page */
+footer{max-width:760px;margin:0 auto;padding:24px 16px 38px;text-align:center}
+footer .brand{justify-content:center;gap:10px;color:var(--deep)}
+footer .mark{width:34px;height:32px}
+footer .wordmark{font-size:19px}
+footer .wordmark i{color:var(--orange)}
+footer .tagline{color:var(--muted);font-size:8px;margin-top:5px;text-align:left}
+footer p{font-size:12px;color:var(--muted);margin-top:12px}
+
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+@media(max-width:560px){
+  h1{font-size:24px}.wordmark{font-size:24px}.brand .mark{width:46px;height:43px}
+  .order-head{flex-direction:column;gap:10px}
+}
+@media(min-width:600px){.wrap{padding:0 18px}}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-dark" viewBox="0 0 140 130">
+  <circle cx="70" cy="60" r="28" fill="#F5A93C"/>
+  <g stroke="#F5A93C" stroke-width="5" stroke-linecap="round"><path d="M70 23V14M96.2 33.8l6.3-6.3M43.8 33.8l-6.3-6.3M107 60h9M33 60h-9"/></g>
+  <rect x="20" y="74" width="100" height="12" rx="6" fill="#FBF3E4"/>
+  <path d="M28 88H112L102 126Q101 130 97 130H43Q39 130 38 126Z" fill="#FBF3E4"/>
+  <g fill="#14402A"><path d="M50 91l7 7-7 7-7-7z"/><path d="M70 91l7 7-7 7-7-7z"/><path d="M90 91l7 7-7 7-7-7z"/><path d="M60 105l7 7-7 7-7-7z"/><path d="M80 105l7 7-7 7-7-7z"/></g>
+</symbol>
+<symbol id="mark-light" viewBox="0 0 140 130">
+  <circle cx="70" cy="60" r="28" fill="#F5A93C"/>
+  <g stroke="#F5A93C" stroke-width="5" stroke-linecap="round"><path d="M70 23V14M96.2 33.8l6.3-6.3M43.8 33.8l-6.3-6.3M107 60h9M33 60h-9"/></g>
+  <rect x="20" y="74" width="100" height="12" rx="6" fill="#14402A"/>
+  <path d="M28 88H112L102 126Q101 130 97 130H43Q39 130 38 126Z" fill="#1F5B3A"/>
+  <g fill="#F5A93C"><path d="M50 91l7 7-7 7-7-7z"/><path d="M70 91l7 7-7 7-7-7z"/><path d="M90 91l7 7-7 7-7-7z"/><path d="M60 105l7 7-7 7-7-7z"/><path d="M80 105l7 7-7 7-7-7z"/></g>
+</symbol>
+</defs></svg>
+<div class="loader" id="loader"><span class="spin"></span>Chargement des commandes...</div>
+<header class="top">
+<svg class="wm" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-dark"/></svg>
+<div class="topin">
+<a class="back" href="seller-dashboard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Retour au tableau de bord</a>
+<div class="brand">
+  <svg class="mark" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-dark"/></svg>
+  <div><div class="wordmark">TOND<i>AA</i>GA</div><div class="tagline">MARCHÉ AFRICAIN</div></div>
+</div>
+<div class="hero"><h1>Mes commandes</h1><p class="subtitle">Confirmez et gérez uniquement les commandes de votre boutique.</p></div>
+</div></header>
+<main class="wrap">
+<div class="notice"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg><span>Vous êtes responsable des commandes de votre boutique uniquement. Une commande contenant des articles d'autres boutiques reste gérée séparément par leurs vendeurs.</span></div>
+<div class="toolbar">
+<select class="filter" id="statusFilter" aria-label="Filtrer les commandes">
+<option value="">Toutes les commandes</option><option value="pending_contact">En attente de contact</option><option value="in_discussion">En discussion</option><option value="confirmed">Confirmées</option><option value="refused">Refusées</option><option value="cancelled">Annulées</option><option value="completed">Terminées</option>
+</select><button class="refresh" id="refreshBtn" type="button">Actualiser</button>
+</div>
+<div class="summary" id="summary">Chargement...</div><section id="ordersList"></section>
+</main>
+<footer>
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 140 130" aria-hidden="true"><use href="#mark-light"/></svg>
+    <div><div class="wordmark">TOND<i>AA</i>GA</div><div class="tagline">MARCHÉ AFRICAIN</div></div>
+  </div>
+  <p>© TONDAAGA · Espace vendeur</p>
+</footer>
+<script>
+const AUTH_URL="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-auth";
+const API_URL="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-public";
+const PUBLISHABLE_KEY="sb_publishable_JDqimevKfqzrgF06tD5JUA_7D_v-PAD";
+const TOKEN_KEY="tondraaga_session_token";
+const labels={pending_contact:"En attente de contact",in_discussion:"En discussion",confirmed:"Confirmée",refused:"Refusée",cancelled:"Annulée",completed:"Terminée"};
+const money=n=>Number(n||0).toLocaleString("fr-FR")+" FCFA";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dateText=s=>{const d=new Date(s);return Number.isNaN(d.getTime())?"":d.toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"})};
+function hideLoader(){document.getElementById("loader").style.display="none"}
+function errorBox(title,message){document.getElementById("ordersList").innerHTML=`<div class="error"><b>${esc(title)}</b><p>${esc(message)}</p></div>`}
+async function checkSession(token){
+ const r=await fetch(AUTH_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({action:"session"})});
+ let d={};try{d=await r.json()}catch{}
+ if(!r.ok||d.success===false||!d.seller)throw new Error("SESSION");
+}
+function actionButtons(o){
+ const id=esc(o.id);
+ if(o.status==="pending_contact")return `<button class="action" onclick="changeStatus('${id}','in_discussion')">En discussion</button><button class="action primary" onclick="changeStatus('${id}','confirmed')">Confirmer</button><button class="action danger" onclick="changeStatus('${id}','refused')">Refuser</button>`;
+ if(o.status==="in_discussion")return `<button class="action primary" onclick="changeStatus('${id}','confirmed')">Confirmer</button><button class="action danger" onclick="changeStatus('${id}','refused')">Refuser</button>`;
+ if(o.status==="confirmed")return `<button class="action primary" onclick="changeStatus('${id}','completed')">Marquer terminée</button>`;
+ return `<span class="meta">Aucune action disponible pour ce statut.</span>`;
+}
+function orderCard(o){
+ const items=(o.items||[]).map(i=>`<div class="item">${i.image_url?`<img src="${esc(i.image_url)}" alt="">`:`<div class="placeholder">📦</div>`}<div class="item-info"><div class="item-name">${esc(i.name)}</div><div class="item-sub">${Number(i.quantity)} × ${money(i.unit_price_xof)}</div></div><div class="item-price">${money(i.line_total_xof)}</div></div>`).join("");
+ const phone=String(o.buyer?.phone||"");const digits=phone.replace(/\D/g,"");
+ const wa=digits?`https://wa.me/${digits}?text=${encodeURIComponent("Bonjour "+(o.buyer?.name||"")+", je vous contacte au sujet de votre commande "+o.order_reference+" sur TONDRAAGA.")}`:"";
+ return `<article class="order" id="order-${esc(o.id)}">
+ <div class="order-head"><div><div class="ref">${esc(o.order_reference||"Commande")}</div><div class="date">${dateText(o.created_at)}</div></div><span class="status ${esc(o.status)}">${esc(labels[o.status]||o.status||"Statut inconnu")}</span></div>
+ <div class="order-mid"><div class="buyer">${esc(o.buyer?.name||"Client")}</div><div class="meta">${esc(o.buyer?.city||"Ville non précisée")} · ${esc(phone||"Téléphone non renseigné")}<br>${(o.items||[]).length} article(s)</div></div>
+ <div class="total-row"><span class="total-label">Montant de votre partie</span><strong class="total">${money(o.total_xof)}</strong></div>
+ <div class="actions"><button class="action" type="button" onclick="toggleDetails('${esc(o.id)}')">Voir détails</button>${wa?`<a class="action" target="_blank" rel="noopener" href="${wa}">Contacter le client</a>`:""}${actionButtons(o)}</div>
+ <div class="details" id="details-${esc(o.id)}"><div class="detail-title">Articles commandés</div>${items||'<p class="meta">Aucun article détaillé.</p>'}
+ <div class="detail-title">Informations du client</div><div class="buyer-box"><b>${esc(o.buyer?.name)}</b><br>${esc(phone)}<br>${esc(o.buyer?.city)}${o.buyer?.address?'<br>'+esc(o.buyer.address):''}${o.buyer?.note?'<br><b>Note :</b> '+esc(o.buyer.note):''}</div>
+ <div class="detail-title">Récapitulatif</div><div class="meta">Sous-total : ${money(o.items_subtotal_xof)}<br>Livraison : ${money(o.delivery_fee_xof)}<br><b>Total : ${money(o.total_xof)}</b></div></div></article>`;
+}
+window.toggleDetails=id=>{const el=document.getElementById("details-"+id);if(el)el.classList.toggle("open")};
+async function changeStatus(id,status){
+ const prompts={in_discussion:"Passer cette commande en discussion ?",confirmed:"Confirmer cette commande ?",refused:"Refuser définitivement cette partie de commande ?",completed:"Confirmer que cette commande est terminée ?"};
+ if(!confirm(prompts[status]||"Confirmer cette action ?"))return;
+ const token=localStorage.getItem(TOKEN_KEY);if(!token){location.replace("login.html");return}
+ const card=document.getElementById("order-"+id);if(card)card.querySelectorAll("button").forEach(b=>b.disabled=true);
+ try{
+  const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLISHABLE_KEY,"x-session-token":token},body:JSON.stringify({action:"seller-order-update",seller_order_id:id,status})});
+  let d={};try{d=await r.json()}catch{}
+  if(!r.ok||d.success===false)throw new Error(d.error||"La mise à jour a échoué.");
+  await loadOrders();
+ }catch(e){alert(e.message||"Impossible de mettre à jour la commande.");if(card)card.querySelectorAll("button").forEach(b=>b.disabled=false)}
+}
+async function loadOrders(){
+ const token=localStorage.getItem(TOKEN_KEY);if(!token){location.replace("login.html");return}
+ const list=document.getElementById("ordersList"),summary=document.getElementById("summary");
+ list.innerHTML='<div class="empty"><span class="spin" style="display:inline-block;vertical-align:middle"></span><p>Chargement...</p></div>';
+ try{
+  await checkSession(token);
+  const status=document.getElementById("statusFilter").value;
+  const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":PUBLISHABLE_KEY,"x-session-token":token},body:JSON.stringify({action:"seller-orders",page:1,limit:50,status})});
+  let d={};try{d=await r.json()}catch{}
+  if(!r.ok||d.success===false)throw new Error(d.error||"Impossible de charger les commandes.");
+  const orders=d.orders||[];summary.textContent=`${d.total||0} commande(s) trouvée(s)`;
+  if(!orders.length){list.innerHTML='<div class="empty"><b>Aucune commande pour le moment</b><p>Les nouvelles commandes adressées à votre boutique apparaîtront ici.</p></div>';return}
+  list.innerHTML=orders.map(orderCard).join("");
+ }catch(e){if(e.message==="SESSION"){localStorage.removeItem(TOKEN_KEY);location.replace("login.html");return}summary.textContent="";errorBox("Chargement impossible",e.message||"Vérifiez votre connexion puis réessayez.");}
+ finally{hideLoader()}
+}
+document.getElementById("statusFilter").addEventListener("change",loadOrders);
+document.getElementById("refreshBtn").addEventListener("click",loadOrders);
+loadOrders();
+</script>
+</body>
+</html>
