@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Historique des ventes | TONDRAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--cream:#FBF3E4;--ink:#172033;--muted:#667085;--line:#E8EDE8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);padding-bottom:30px}
+button,a{font:inherit}a{text-decoration:none;color:inherit}
+.top{background:var(--deep);color:var(--cream);padding:18px 17px 28px;border-radius:0 0 25px 25px}
+.topin{max-width:720px;margin:auto}
+.back{display:inline-flex;align-items:center;gap:8px;color:#F7EBD6;font-size:14px;font-weight:600;margin-bottom:22px}
+.back svg{width:19px;height:19px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.04em;font-size:18px;margin-bottom:18px}
+.brand-mark{width:32px;height:32px}
+.brand i{font-style:normal;color:var(--ochre)}
+h1{font-size:27px;font-weight:800;margin-bottom:5px}
+.subtitle{font-size:14px;color:#D8E4DB;line-height:1.5}
+.wrap{max-width:720px;margin:20px auto;padding:0 14px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:17px}
+.stat{background:#fff;border:1px solid rgba(20,64,42,.1);border-radius:15px;padding:15px}
+.stat-label{font-size:12px;color:var(--muted);margin-bottom:7px}
+.stat-value{font-size:21px;font-weight:800;color:var(--deep);overflow-wrap:anywhere}
+.toolbar{display:flex;gap:9px;align-items:center;margin-bottom:14px}
+.filter{flex:1;min-width:0;border:1px solid #DDE5DE;border-radius:12px;background:#fff;padding:12px 13px;color:var(--deep);font-size:14px;outline:none}
+.refresh{border:0;border-radius:12px;background:var(--green);color:#fff;padding:12px 14px;font-weight:700;display:flex;align-items:center;gap:7px;cursor:pointer}
+.refresh svg{width:17px;height:17px}
+.summary{font-size:13px;color:var(--muted);margin:0 2px 12px}
+.sale{background:#fff;border:1px solid rgba(20,64,42,.1);border-radius:17px;margin-bottom:13px;overflow:hidden;box-shadow:0 5px 18px rgba(20,64,42,.045)}
+.sale-head{padding:15px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.ref{font-weight:800;color:var(--deep);font-size:15px;overflow-wrap:anywhere}
+.date{font-size:12px;color:var(--muted);margin-top:4px}
+.status{font-size:11px;font-weight:700;padding:6px 9px;border-radius:999px;white-space:nowrap;background:#E3F1E9;color:#1F5B3A}
+.sale-mid{padding:0 15px 14px}
+.buyer{font-size:14px;font-weight:700;color:#25352C}
+.meta{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5}
+.total-row{border-top:1px solid var(--line);padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.total-label{font-size:13px;color:var(--muted)}
+.total{font-size:17px;font-weight:800;color:var(--deep);white-space:nowrap}
+.details{display:none;border-top:1px solid var(--line);padding:14px 15px 16px;background:#FCFDFC}
+.details.open{display:block}
+.detail-title{font-size:14px;font-weight:800;color:var(--deep);margin:12px 0 9px}
+.detail-title:first-child{margin-top:0}
+.item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #EFF2EF}
+.item:last-child{border-bottom:0}
+.item img,.placeholder{width:48px;height:48px;border-radius:10px;object-fit:cover;background:#E3F1E9;flex-shrink:0}
+.placeholder{display:grid;place-items:center;color:var(--green)}
+.placeholder svg{width:22px;height:22px}
+.item-info{flex:1;min-width:0}
+.item-name{font-size:13px;font-weight:700;color:#25352C;overflow-wrap:anywhere}
+.item-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.item-price{font-size:13px;font-weight:700;color:var(--deep);white-space:nowrap}
+.buyer-box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 12px;font-size:13px;line-height:1.65;color:#475467}
+.empty,.error{background:#fff;border:1px dashed #D5DED6;border-radius:16px;padding:34px 20px;text-align:center;color:var(--muted)}
+.empty svg,.error svg{width:42px;height:42px;color:var(--green);margin-bottom:12px}
+.empty b,.error b{display:block;color:var(--deep);font-size:16px;margin-bottom:5px}
+.empty p,.error p{font-size:13px;line-height:1.5}
+.more{width:100%;border:1px solid #DDE5DE;background:#fff;color:var(--deep);border-radius:12px;padding:12px;font-weight:700;margin:4px 0 15px;cursor:pointer}
+.more:disabled{opacity:.6;cursor:wait}
+.loader{position:fixed;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;z-index:20;color:var(--deep);font-weight:700}
+.spin{width:24px;height:24px;border:3px solid #D9E4DC;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin-right:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(min-width:600px){.wrap{padding:0 18px}.sale-head{padding:17px 18px}.sale-mid{padding:0 18px 15px}.total-row{padding:13px 18px}.details{padding:16px 18px}}
+</style>
+</head>
+<body>
+<div class="loader" id="loader"><span class="spin"></span>Chargement des ventes...</div>
+<header class="top">
+  <div class="topin">
+    <a class="back" href="profile.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Retour au profil</a>
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="46" r="26" fill="#F2A83B"/><path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#FBF3E4"/><rect x="12" y="54" width="96" height="10" rx="5" fill="#FBF3E4"/><g fill="#14402A"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g></svg>
+      <span>TOND<i>AA</i>GA</span>
+    </div>
+    <h1>Historique des ventes</h1>
+    <p class="subtitle">Retrouvez les commandes confirmées et terminées de votre boutique.</p>
+  </div>
+</header>
+<main class="wrap">
+  <section class="stats">
+    <div class="stat"><div class="stat-label">Ventes affichées</div><div class="stat-value" id="saleCount">—</div></div>
+    <div class="stat"><div class="stat-label">Montant affiché</div><div class="stat-value" id="saleTotal">—</div></div>
+  </section>
+  <div class="toolbar">
+    <select class="filter" id="statusFilter" aria-label="Filtrer les ventes">
+      <option value="">Toutes les ventes</option>
+      <option value="confirmed">Confirmées</option>
+      <option value="completed">Terminées</option>
+    </select>
+    <button class="refresh" id="refreshBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9A7 7 0 0 1 18 6l2 6M4 12l2 6a7 7 0 0 0 12.4-3"/></svg>Actualiser</button>
+  </div>
+  <div class="summary" id="summary">Chargement...</div>
+  <section id="salesList"></section>
+  <button class="more" id="moreBtn" hidden>Charger plus de ventes</button>
+</main>
+<script>
+const AUTH_URL="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-auth";
+const API_URL="https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-public";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_JDqimevKfqzrgF06tD5JUA_7D_v-PAD";
+const TOKEN_KEY="tondraaga_session_token";
+const PAGE_SIZE=50;
+const labels={confirmed:"Confirmée",completed:"Terminée"};
+const money=n=>Number(n||0).toLocaleString("fr-FR")+" FCFA";
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dateText=s=>{try{return new Date(s).toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"})}catch{return ""}};
+let currentPage=1,totalCount=0,loadedSales=[],loading=false;
+function hideLoader(){document.getElementById("loader").style.display="none"}
+function errorBox(title,message){document.getElementById("salesList").innerHTML=`<div class="error"><b>${esc(title)}</b><p>${esc(message)}</p></div>`}
+async function checkSession(token){
+  const r=await fetch(AUTH_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify({action:"session"})});
+  let d={};try{d=await r.json()}catch{}
+  if(!r.ok||d.success===false||!d.seller)throw new Error("SESSION");
+}
+function saleCard(o){
+  const items=(o.items||[]).map(i=>`<div class="item">${i.image_url?`<img src="${esc(i.image_url)}" alt="">`:`<div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></div>`}<div class="item-info"><div class="item-name">${esc(i.name)}</div><div class="item-sub">${Number(i.quantity)} × ${money(i.unit_price_xof)}</div></div><div class="item-price">${money(i.line_total_xof)}</div></div>`).join("");
+  return `<article class="sale">
+    <div class="sale-head"><div><div class="ref">${esc(o.order_reference||"Vente")}</div><div class="date">${dateText(o.created_at)}</div></div><span class="status">${esc(labels[o.status]||o.status||"Statut inconnu")}</span></div>
+    <div class="sale-mid"><div class="buyer">${esc(o.buyer?.name||"Client")}</div><div class="meta">${esc(o.buyer?.city||"Ville non précisée")} · ${(o.items||[]).length} article(s)</div></div>
+    <div class="total-row"><span class="total-label">Montant de la vente</span><strong class="total">${money(o.total_xof)}</strong></div>
+    <button class="more" style="margin:0;border:0;border-top:1px solid var(--line);border-radius:0" type="button" onclick="toggleDetails('${esc(o.id)}')">Voir le détail</button>
+    <div class="details" id="details-${esc(o.id)}">
+      <div class="detail-title">Articles vendus</div>${items||'<p class="meta">Aucun article détaillé.</p>'}
+      <div class="detail-title">Informations du client</div>
+      <div class="buyer-box"><b>${esc(o.buyer?.name)}</b><br>${esc(o.buyer?.phone)}<br>${esc(o.buyer?.city)}${o.buyer?.address?'<br>'+esc(o.buyer.address):''}${o.buyer?.note?'<br><b>Note :</b> '+esc(o.buyer.note):''}</div>
+      <div class="detail-title">Récapitulatif</div>
+      <div class="meta">Sous-total : ${money(o.items_subtotal_xof)}<br>Livraison : ${money(o.delivery_fee_xof)}<br><b>Total : ${money(o.total_xof)}</b></div>
+    </div>
+  </article>`;
+}
+window.toggleDetails=id=>{const el=document.getElementById("details-"+id);if(el)el.classList.toggle("open")};
+function updateSummary(){
+  const total=loadedSales.reduce((sum,o)=>sum+Number(o.total_xof||0),0);
+  document.getElementById("saleCount").textContent=loadedSales.length.toLocaleString("fr-FR");
+  document.getElementById("saleTotal").textContent=money(total);
+  document.getElementById("summary").textContent=`${loadedSales.length} vente(s) confirmée(s) ou terminée(s) chargée(s)`;
+  document.getElementById("moreBtn").hidden=loadedSales.length>=totalCount||loadedSales.length===0;
+}
+async function loadSales(reset=true){
+  if(loading)return;
+  loading=true;
+  const token=localStorage.getItem(TOKEN_KEY);
+  if(!token){window.location.replace("login.html");return}
+  const list=document.getElementById("salesList"),more=document.getElementById("moreBtn");
+  if(reset){currentPage=1;loadedSales=[];list.innerHTML='<div class="empty"><span class="spin" style="display:inline-block;vertical-align:middle"></span><p>Chargement...</p></div>'}
+  more.disabled=true;more.textContent="Chargement...";
+  try{
+    await checkSession(token);
+    const selected=document.getElementById("statusFilter").value;
+    const statuses=selected?[selected]:["confirmed","completed"];
+    const results=await Promise.all(statuses.map(async status=>{
+      const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY,"x-session-token":token},body:JSON.stringify({action:"seller-orders",page:currentPage,limit:PAGE_SIZE,status})});
+      let data={};try{data=await response.json()}catch{}
+      if(!response.ok||data.success===false)throw new Error(data.error||"Impossible de charger l'historique des ventes.");
+      return data;
+    }));
+    const fetched=results.flatMap(data=>data.orders||[]).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+    loadedSales=reset?fetched:loadedSales.concat(fetched);
+    totalCount=results.reduce((sum,data)=>sum+Number(data.total||0),0);
+    list.innerHTML=loadedSales.length?loadedSales.map(saleCard).join(""):'<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 6-7"/></svg><b>Aucune vente pour le moment</b><p>Les commandes confirmées ou terminées apparaîtront ici.</p></div>';
+    updateSummary();
+    more.hidden=loadedSales.length>=totalCount||!loadedSales.length;
+  }catch(e){
+    if(e.message==="SESSION"){localStorage.removeItem(TOKEN_KEY);window.location.replace("login.html");return}
+    document.getElementById("summary").textContent="";
+    errorBox("Chargement impossible",e.message||"Vérifiez votre connexion puis réessayez.");
+  }finally{
+    hideLoader();loading=false;more.disabled=false;more.textContent="Charger plus de ventes";
+  }
+}
+document.getElementById("statusFilter").addEventListener("change",()=>loadSales(true));
+document.getElementById("refreshBtn").addEventListener("click",()=>loadSales(true));
+document.getElementById("moreBtn").addEventListener("click",()=>{currentPage++;loadSales(false)});
+loadSales(true);
+</script>
+</body>
+</html>
