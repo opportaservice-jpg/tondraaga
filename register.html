@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14402A">
+<title>Inscription vendeur | TONDRAAGA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#1F5B3A;--deep:#14402A;--ochre:#F2A83B;--orange:#D9480F;--cream:#FBF3E4;--ink:#172033;--muted:#5B6575;--line:#DDE3DF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',Arial,sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+svg.defs{position:absolute;width:0;height:0}
+header{background:var(--deep);height:68px;padding:0 6%;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:42px;height:42px}
+.brand b{font-size:23px;font-weight:800;letter-spacing:.04em;color:var(--cream)}
+.brand b i{font-style:normal;color:var(--ochre)}
+.back{color:var(--cream);font-weight:600;font-size:14px;text-decoration:none;border:1.5px solid rgba(251,243,228,.4);padding:8px 15px;border-radius:999px}
+.back:hover,.back:focus-visible{background:var(--cream);color:var(--deep)}
+.split{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+aside{background:var(--green);color:var(--cream);position:relative;overflow:hidden;padding:64px 8%;display:flex;flex-direction:column;justify-content:center}
+aside .wm{position:absolute;right:-90px;bottom:-70px;width:420px;opacity:.12}
+aside h1{font-size:clamp(30px,3.4vw,44px);font-weight:800;line-height:1.12;margin-bottom:18px;position:relative}
+aside>p{font-size:17px;line-height:1.65;color:rgba(251,243,228,.82);max-width:440px;margin-bottom:32px;position:relative}
+.perks{list-style:none;display:grid;gap:16px;position:relative}
+.perks li{display:flex;align-items:center;gap:14px;font-size:16px;font-weight:600}
+.perks span{width:38px;height:38px;border-radius:12px;background:var(--ochre);display:grid;place-items:center;flex-shrink:0}
+.perks svg{width:20px;height:20px}
+.formside{padding:48px 6%;display:flex;align-items:center;justify-content:center}
+.formwrap{width:100%;max-width:470px}
+.mob{display:none;text-align:center;margin-bottom:22px}
+.mob h1{font-size:28px;font-weight:800;color:var(--deep);margin-bottom:8px}
+.mob p{font-size:15px;line-height:1.6;color:var(--muted)}
+.card{background:#fff;border:1.5px solid rgba(20,64,42,.12);border-radius:22px;padding:32px 28px;box-shadow:0 14px 40px rgba(20,64,42,.1)}
+.form-title{font-size:22px;font-weight:800;color:var(--deep);margin-bottom:6px}
+.form-subtitle{color:var(--muted);font-size:14px;margin-bottom:24px}
+.field{margin-bottom:18px}
+label{display:block;font-size:14px;font-weight:600;color:var(--deep);margin-bottom:8px}
+input,select{width:100%;height:50px;padding:0 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font:inherit;font-size:15px;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(31,91,58,.14)}
+input[readonly]{background:#F3F6F4;font-weight:600;color:var(--deep)}
+.phone-row{display:grid;grid-template-columns:110px 1fr;gap:10px}
+.password-wrap{position:relative}
+.password-wrap input{padding-right:84px}
+.show-password{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--green);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:8px}
+.hint{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.5}
+.terms{display:flex;align-items:flex-start;gap:10px;margin:22px 0;font-size:13px;color:var(--muted);line-height:1.55;font-weight:400}
+.terms input{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:var(--green)}
+.submit{width:100%;height:54px;background:var(--green);color:#fff;border:0;border-radius:12px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:background .15s}
+.submit:hover{background:var(--deep)}
+.submit:disabled{opacity:.65;cursor:not-allowed}
+.message{display:none;padding:13px 14px;border-radius:12px;font-size:14px;line-height:1.5;margin-bottom:18px}
+.message.error{display:block;background:#FDECEC;color:#A3231A}
+.message.success{display:block;background:#E5F5EC;color:var(--green)}
+.bottom{text-align:center;margin-top:22px;font-size:14px;color:var(--muted)}
+.bottom a{color:var(--green);font-weight:600}
+footer{background:var(--deep);color:rgba(251,243,228,.75);text-align:center;font-size:13px;padding:20px}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+input:focus-visible,select:focus-visible{outline:none}
+@media (max-width:900px){.split{grid-template-columns:1fr}aside{display:none}.mob{display:block}.formside{padding:32px 16px 40px}}
+@media (max-width:420px){header{padding:0 16px;height:62px}.brand svg{width:36px;height:36px}.brand b{font-size:19px}.card{padding:24px 18px}.phone-row{grid-template-columns:96px 1fr}}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true"><defs>
+<symbol id="mark-light" viewBox="0 0 120 120">
+<circle cx="60" cy="46" r="26" fill="#F2A83B"/>
+<path d="M18 58H102L90 104Q89 108 85 108H35Q31 108 30 104Z" fill="#FBF3E4"/>
+<rect x="12" y="54" width="96" height="10" rx="5" fill="#FBF3E4"/>
+<g fill="#14402A"><polygon points="38,68 46,76 38,84 30,76"/><polygon points="60,68 68,76 60,84 52,76"/><polygon points="82,68 90,76 82,84 74,76"/><polygon points="49,84 57,92 49,100 41,92"/><polygon points="71,84 79,92 71,100 63,92"/></g>
+</symbol>
+</defs></svg>
+
+<header>
+  <a class="brand" href="index.html" aria-label="TONDRAAGA, accueil">
+    <svg aria-hidden="true"><use href="#mark-light"/></svg>
+    <b>TOND<i>AA</i>GA</b>
+  </a>
+  <a href="index.html" class="back">Retour</a>
+</header>
+
+<div class="split">
+  <aside>
+    <svg class="wm" viewBox="0 0 120 120" aria-hidden="true"><use href="#mark-light"/></svg>
+    <h1>Ouvrez votre boutique sur TONDRAAGA.</h1>
+    <p>Créez votre compte vendeur, puis configurez votre boutique pour présenter vos produits à de nouveaux clients.</p>
+    <ul class="perks">
+      <li><span><svg viewBox="0 0 24 24" fill="none" stroke="#14402A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M5 12v8h14v-8"/></svg></span>Une boutique à votre nom</li>
+      <li><span><svg viewBox="0 0 24 24" fill="none" stroke="#14402A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>Publiez vos produits facilement</li>
+      <li><span><svg viewBox="0 0 24 24" fill="none" stroke="#14402A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg></span>Recevez les commandes de vos clients</li>
+    </ul>
+  </aside>
+
+  <main class="formside">
+    <div class="formwrap">
+      <div class="mob">
+        <h1>Devenez vendeur</h1>
+        <p>Créez votre compte pour ouvrir votre boutique sur TONDRAAGA.</p>
+      </div>
+
+      <section class="card">
+        <h2 class="form-title">Créer mon compte</h2>
+        <p class="form-subtitle">Renseignez vos informations pour commencer.</p>
+
+        <div id="message" class="message" role="alert"></div>
+
+        <form id="registerForm">
+          <div class="field">
+            <label for="country">Pays</label>
+            <select id="country" required>
+              <option value="+226" data-iso="BF">🇧🇫 Burkina Faso (+226)</option>
+              <option value="+225" data-iso="CI">🇨🇮 Côte d'Ivoire (+225)</option>
+              <option value="+223" data-iso="ML">🇲🇱 Mali (+223)</option>
+              <option value="+227" data-iso="NE">🇳🇪 Niger (+227)</option>
+              <option value="+228" data-iso="TG">🇹🇬 Togo (+228)</option>
+              <option value="+229" data-iso="BJ">🇧🇯 Bénin (+229)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="phone">Numéro de téléphone</label>
+            <div class="phone-row">
+              <input id="callingCode" value="+226" readonly aria-label="Indicatif du pays">
+              <input id="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="Votre numéro" required maxlength="20">
+            </div>
+            <p class="hint">Saisissez votre numéro sans l'indicatif du pays.</p>
+          </div>
+
+          <div class="field">
+            <label for="password">Mot de passe</label>
+            <div class="password-wrap">
+              <input id="password" type="password" autocomplete="new-password" placeholder="Créer un mot de passe" minlength="10" maxlength="128" required>
+              <button type="button" class="show-password" onclick="togglePassword('password', this)">Voir</button>
+            </div>
+            <p class="hint">Minimum 10 caractères.</p>
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+            <div class="password-wrap">
+              <input id="confirmPassword" type="password" autocomplete="new-password" placeholder="Confirmer le mot de passe" minlength="10" maxlength="128" required>
+              <button type="button" class="show-password" onclick="togglePassword('confirmPassword', this)">Voir</button>
+            </div>
+          </div>
+
+          <label class="terms">
+            <input type="checkbox" id="acceptTerms" required>
+            <span>J'accepte les conditions d'utilisation et la politique de confidentialité de TONDRAAGA.</span>
+          </label>
+
+          <button type="submit" class="submit" id="submitButton">Créer mon compte</button>
+        </form>
+      </section>
+
+      <div class="bottom">Vous avez déjà un compte ? <a href="login.html">Se connecter</a></div>
+    </div>
+  </main>
+</div>
+
+<footer>© 2026 TONDRAAGA. Tous droits réservés.</footer>
+
+<script>
+  const API_URL =
+    "https://mzcwonizgrdzxikqeagu.supabase.co/functions/v1/tondraaga-auth";
+
+  const SESSION_KEY = "tondraaga_session_token";
+
+  const countrySelect = document.getElementById("country");
+  const callingCode = document.getElementById("callingCode");
+  const form = document.getElementById("registerForm");
+  const messageBox = document.getElementById("message");
+  const submitButton = document.getElementById("submitButton");
+
+  // Si un vendeur possède déjà une session, il ne doit pas
+  // recommencer l'inscription.
+  if (localStorage.getItem(SESSION_KEY)) {
+    window.location.replace("shop-setup.html");
+  }
+
+  countrySelect.addEventListener("change", () => {
+    callingCode.value = countrySelect.value;
+  });
+
+  function togglePassword(id, button) {
+    const field = document.getElementById(id);
+
+    if (field.type === "password") {
+      field.type = "text";
+      button.textContent = "Masquer";
+    } else {
+      field.type = "password";
+      button.textContent = "Voir";
+    }
+  }
+
+  function showMessage(text, type) {
+    messageBox.textContent = text;
+    messageBox.className = "message " + type;
+    messageBox.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const selectedCountry =
+      countrySelect.options[countrySelect.selectedIndex];
+
+    const countryCode = countrySelect.value;
+    const phone = document.getElementById("phone").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword =
+      document.getElementById("confirmPassword").value;
+
+    if (!phone) {
+      showMessage("Veuillez saisir votre numéro de téléphone.", "error");
+      return;
+    }
+
+    if (password.length < 10 || password.length > 128) {
+      showMessage(
+        "Votre mot de passe doit contenir entre 10 et 128 caractères.",
+        "error"
+      );
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      showMessage(
+        "Les deux mots de passe ne correspondent pas.",
+        "error"
+      );
+      return;
+    }
+
+    if (!document.getElementById("acceptTerms").checked) {
+      showMessage(
+        "Veuillez accepter les conditions d'utilisation.",
+        "error"
+      );
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Création du compte...";
+    messageBox.className = "message";
+    messageBox.textContent = "";
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          action: "signup",
+          country_calling_code: countryCode,
+          phone_number: phone,
+          password: password,
+          confirm_password: confirmPassword
+        })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.error || "Impossible de créer votre compte."
+        );
+      }
+
+      if (!result.session || !result.session.token) {
+        throw new Error(
+          "Le compte a été créé, mais la session n'a pas été reçue. Contactez l'assistance avant de recommencer."
+        );
+      }
+
+      // Stockage du jeton de session personnalisé.
+      // Le mot de passe n'est jamais enregistré dans le navigateur.
+      localStorage.setItem(SESSION_KEY, result.session.token);
+
+      showMessage(
+        "Votre compte vendeur a été créé avec succès. Redirection...",
+        "success"
+      );
+
+      submitButton.textContent = "Compte créé";
+
+      setTimeout(() => {
+        window.location.replace("shop-setup.html");
+      }, 1000);
+
+    } catch (error) {
+      showMessage(
+        error.message || "Erreur de connexion. Vérifiez votre Internet.",
+        "error"
+      );
+
+      submitButton.disabled = false;
+      submitButton.textContent = "Créer mon compte";
+    }
+  });
+</script>
+</body>
+</html>
